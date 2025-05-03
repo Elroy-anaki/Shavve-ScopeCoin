@@ -1,6 +1,5 @@
-// pages/form.tsx
 'use client'
-// pages/form.tsx
+
 import { useForm, FormProvider } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,24 +12,31 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import axios from 'axios'
 
 import { formSchema } from "@/app/schemas/signUp.schema";
+import { useRouter } from 'next/navigation'
 
 
 
 type SignUpData = z.infer<typeof formSchema>;
 
 export default function SignUpForm() {
-
-  // שימוש ב-useForm עם Zod לאימות
+  const router = useRouter()
   const methods = useForm<SignUpData>({
     resolver: zodResolver(formSchema),
   });
-
-  // פונקציית שליחה
-  const onSubmit = (data: SignUpData) => {
-    alert(`שם משתמש: ${data.userName}, דואר אלקטרוני: ${data.userEmail}`);
-    console.log(data)
+  
+  const onSubmit =  async( user: SignUpData) => {
+    try {
+      const{ data } = await axios.post("http://localhost:3000/api/auth/signUp", user)
+      console.log(data)
+      router.replace("/")
+    } catch (error) {
+      alert("eroor")
+      console.log(error)
+      
+    }
   };
 
   return (
@@ -64,6 +70,21 @@ export default function SignUpForm() {
                 <FormLabel>Email Address</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder="email..." />
+                </FormControl>
+                {methods.formState.errors.userEmail && (
+                  <FormMessage>{methods.formState.errors.userEmail.message}</FormMessage>
+                )}
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={methods.control}
+            name="userPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>user Password</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="password..." />
                 </FormControl>
                 {methods.formState.errors.userEmail && (
                   <FormMessage>{methods.formState.errors.userEmail.message}</FormMessage>
