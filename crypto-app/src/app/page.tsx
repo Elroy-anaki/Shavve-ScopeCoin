@@ -1,11 +1,10 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
 import SignUpForm from "./components/SignUpForm";
 
 export default function Home() {
   return (
     <>
-    <SignUpForm />
+    <div className="bg-red-500"> Home</div>
     </>
   );
 }
