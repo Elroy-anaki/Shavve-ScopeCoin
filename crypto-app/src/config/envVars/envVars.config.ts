@@ -11,6 +11,8 @@ DB_NAME:string
 DB_SSL:boolean
 DB_URL: string,
 HASH_SALT: number
+BASE_URL: string
+
 }
 
 export const envVars: IEnvVars = {
@@ -21,7 +23,8 @@ export const envVars: IEnvVars = {
     DB_NAME: process.env.DB_NAME || "",
     DB_SSL: Boolean(process.env.DB_SSL) || true,
     DB_URL : process.env.DB_URL || "",
-    HASH_SALT: Number(process.env.HASH_SALT) || 10
+    HASH_SALT: Number(process.env.HASH_SALT) || 10,
+    BASE_URL: process.env.BASE_URL || ""
 
 }
 
