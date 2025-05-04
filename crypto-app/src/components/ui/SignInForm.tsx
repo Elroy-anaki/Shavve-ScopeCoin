@@ -46,22 +46,26 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="px-10 mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center text-amber-500">Sign In</h1>
+    <div className="px-3 sm:px-6 md:px-10 mx-auto w-full">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center text-amber-500">Sign In</h1>
 
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
 
           <FormField
             control={methods.control}
             name="userEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-amber-500">Email Address</FormLabel>
+                <FormLabel className="text-amber-500 text-sm sm:text-base">Email Address</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="email..." />
+                  <Input 
+                    {...field} 
+                    placeholder="email..." 
+                    className="text-sm sm:text-base p-2 sm:p-3"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm" />
               </FormItem>
             )}
           />
@@ -71,16 +75,26 @@ export default function SignInForm() {
             name="userPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-amber-500">Password</FormLabel>
+                <FormLabel className="text-amber-500 text-sm sm:text-base">Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} placeholder="password..." />
+                  <Input 
+                    type="password" 
+                    {...field} 
+                    placeholder="password..." 
+                    className="text-sm sm:text-base p-2 sm:p-3"
+                  />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs sm:text-sm" />
               </FormItem>
             )}
           />
 
-          <Button type="submit" className="w-full cursor-pointer bg-amber-600 hover:bg-amber-700">Sign In</Button>
+          <Button 
+            type="submit" 
+            className="w-full cursor-pointer bg-amber-600 hover:bg-amber-700 py-2 sm:py-3 text-sm sm:text-base mt-2 sm:mt-4"
+          >
+            Sign In
+          </Button>
         </form>
       </FormProvider>
     </div>

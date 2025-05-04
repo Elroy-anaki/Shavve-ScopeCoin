@@ -34,7 +34,7 @@ export default function SignUpForm() {
   const onSubmit = async (user: SignUpData) => {
     try {
       await signUpReq.mutateAsync(user)
-      toast("Thanks for your registaration. Sign in Please")
+      toast("Thanks for your registration. Sign in Please")
       router.replace("/auth/signIn");
     } catch (error) {
       alert("Error");
@@ -43,23 +43,27 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
+    <div className="max-w-full sm:max-w-md mx-auto p-2 sm:p-4">
 
-      <h1 className="text-xl font-bold mb-6 text-center">Sign Up</h1>
+      <h1 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-center">Sign Up</h1>
       
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
           <FormField
             control={methods.control}
             name="userName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>User Name</FormLabel>
+                <FormLabel className="text-sm sm:text-base">User Name</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="user name..." />
+                  <Input 
+                    {...field} 
+                    placeholder="user name..." 
+                    className="text-sm sm:text-base p-2 sm:p-3" 
+                  />
                 </FormControl>
                 {methods.formState.errors.userName && (
-                  <FormMessage>{methods.formState.errors.userName.message}</FormMessage>
+                  <FormMessage className="text-xs sm:text-sm">{methods.formState.errors.userName.message}</FormMessage>
                 )}
               </FormItem>
             )}
@@ -70,12 +74,16 @@ export default function SignUpForm() {
             name="userEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email Address</FormLabel>
+                <FormLabel className="text-sm sm:text-base">Email Address</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="email..." />
+                  <Input 
+                    {...field} 
+                    placeholder="email..." 
+                    className="text-sm sm:text-base p-2 sm:p-3" 
+                  />
                 </FormControl>
                 {methods.formState.errors.userEmail && (
-                  <FormMessage>{methods.formState.errors.userEmail.message}</FormMessage>
+                  <FormMessage className="text-xs sm:text-sm">{methods.formState.errors.userEmail.message}</FormMessage>
                 )}
               </FormItem>
             )}
@@ -86,18 +94,28 @@ export default function SignUpForm() {
             name="userPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>User Password</FormLabel>
+                <FormLabel className="text-sm sm:text-base">User Password</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="password..." type="password" />
+                  <Input 
+                    {...field} 
+                    placeholder="password..." 
+                    type="password" 
+                    className="text-sm sm:text-base p-2 sm:p-3" 
+                  />
                 </FormControl>
                 {methods.formState.errors.userPassword && (
-                  <FormMessage>{methods.formState.errors.userPassword.message}</FormMessage>
+                  <FormMessage className="text-xs sm:text-sm">{methods.formState.errors.userPassword.message}</FormMessage>
                 )}
               </FormItem>
             )}
           />
 
-          <Button type="submit" className="w-full cursor-pointer">Sign Up</Button>
+          <Button 
+            type="submit" 
+            className="w-full cursor-pointer py-2 sm:py-3 text-sm sm:text-base mt-2 sm:mt-4"
+          >
+            Sign Up
+          </Button>
         </form>
       </FormProvider>
       
