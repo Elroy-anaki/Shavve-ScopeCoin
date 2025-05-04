@@ -7,7 +7,8 @@ import { httpBatchLink } from '@trpc/client';
 import { Providers } from "./Providres";
 import { NavBar } from "@/components/ui/NavBar";
 
-
+import { Toaster } from "@/components/ui/sonner"
+import {AppToaster} from "@/providers/ToastProvider"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -42,11 +43,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Providers>
-          <header className="h-[8vh] w-full bg-gray-800 py-2 flex items-center">
+          <header className="h-[8vh] w-full bg-gray-800 py-2 flex items-center border-b-2 border-b-gray-300">
             <NavBar />
           </header>
-          <main className="flex-1">
+          <main className="flex-1 bg-gray-700 pt-20">
             {children}
+            <AppToaster />
           </main>
         </Providers>
       </body>

@@ -16,6 +16,8 @@ import axios from 'axios'
 import {trpcClientComp} from "@/server/trpc.Provider"
 import { signUpSchema } from "@/validation/auth/signUp.schema";
 import { useRouter } from 'next/navigation';
+import { toast } from "sonner";
+
 
 
 type SignUpData = z.infer<typeof signUpSchema>;
@@ -32,7 +34,8 @@ export default function SignUpForm() {
   const onSubmit = async (user: SignUpData) => {
     try {
       await signUpReq.mutateAsync(user)
-      router.replace("/");
+      toast("Thanks for your registaration. Sign in Please")
+      router.replace("/auth/signIn");
     } catch (error) {
       alert("Error");
       console.log(error);

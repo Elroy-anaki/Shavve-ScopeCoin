@@ -1,12 +1,15 @@
-import SignUpForm from "@/components/ui/SignUpForm"
+import { authOptions, isSession } from "@/utils/auth"
+import { redirect } from "next/navigation"
+import {SignUpPage} from "./SignUpPage"
 
-export default function Page ()  {
+export default async function Page ()  {
+    const session = await isSession(authOptions)
+    if(session) {
+        redirect("/")
+    }
 
     return (
-        <>
-            <div>
-                <h2 className="text-5xl text-black">Welcome To Our Platform</h2>
-                <SignUpForm />
-            </div></>
+        <><SignUpPage />
+            </>
     )
 }

@@ -12,15 +12,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
+import { toast } from "sonner"
 import { signIn } from "next-auth/react";
 import { signInSchema } from "@/validation/auth/signIn.schema";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuthStore";
 
 type SignInData = z.infer<typeof signInSchema>;
 
 export default function SignInForm() {
   const router = useRouter();
+  const auth = useAuth()
 
   const methods = useForm<SignInData>({
     resolver: zodResolver(signInSchema),
@@ -33,6 +35,8 @@ export default function SignInForm() {
       password: user.userPassword,
     });
     console.log(res)
+    auth.setIsAuth(true)
+    toast.success("Welcome!")
 
     if (res?.error) {
       alert("האימייל או הסיסמה שגויים");
@@ -42,8 +46,8 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      <h1 className="text-xl font-bold mb-6 text-center">Sign In</h1>
+    <div className="px-10 mx-auto">
+      <h1 className="text-2xl font-bold mb-6 text-center text-amber-500">Sign In</h1>
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
@@ -53,7 +57,7 @@ export default function SignInForm() {
             name="userEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email Address</FormLabel>
+                <FormLabel className="text-amber-500">Email Address</FormLabel>
                 <FormControl>
                   <Input {...field} placeholder="email..." />
                 </FormControl>
@@ -67,7 +71,7 @@ export default function SignInForm() {
             name="userPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-amber-500">Password</FormLabel>
                 <FormControl>
                   <Input type="password" {...field} placeholder="password..." />
                 </FormControl>
@@ -76,7 +80,7 @@ export default function SignInForm() {
             )}
           />
 
-          <Button type="submit" className="w-full cursor-pointer">Sign In</Button>
+          <Button type="submit" className="w-full cursor-pointer bg-amber-600 hover:bg-amber-700">Sign In</Button>
         </form>
       </FormProvider>
     </div>

@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions, SessionStrategy } from "next-auth"
+import NextAuth, { getServerSession, NextAuthOptions, SessionStrategy } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { db } from "@/db/index"
 import bcrypt from "bcrypt"
@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/sigIn", 
+    signIn: "/auth/signIn", 
     error: "/auth/error"
   },
   session: {
@@ -70,14 +70,15 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email
         session.user.name = token.name
       }
-      console.log("Session callback:", session);
-    if (!session) {
-      console.log("No session found after sign out");
-    }
       return session
     },
   },
 }
 
-
 export default NextAuth(authOptions)
+
+
+export const isSession = async(authOptions: NextAuthOptions) => {
+  const session = await getServerSession(authOptions)
+  return session
+}

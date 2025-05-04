@@ -2,11 +2,16 @@
 
 import Link from "next/link"
 import { Button } from "./button"
+import { useAuth } from "@/hooks/useAuthStore"
+import LogoutButton from "./LogoutButton"
+import { useSession } from "next-auth/react"
 
 
 
 export const NavBar = () => {
-
+    const session = useSession();
+    const auth = useAuth();
+    
     return (
         <>
 
@@ -14,7 +19,8 @@ export const NavBar = () => {
             <div className="flex justify-center">
             <li> <Link href={`/auth/signUp`}>
                     <Button className="rounded-r-lg bg-transparent py-6 text-2xl hover:bg-amber-500 ">
-                        Hi, guest!
+                      
+                        {session.status === "authenticated" ? session.data.user?.name : `Hi, guest!`}
                     </Button>
                 </Link></li>
             </div>
@@ -35,10 +41,8 @@ export const NavBar = () => {
                     </Button>
                 </Link></li>
             </div>
-                
                 <div className="flex justify-between items-center">
-                
-                <li>
+                {session.status === "authenticated" ? (<li><LogoutButton /></li>) :(<><li>
                     <Link href={`/auth/signIn`}>
                         <Button className="rounded-l-lg bg-transparent hover:bg-amber-500">
                             Sign In
@@ -51,7 +55,9 @@ export const NavBar = () => {
                     <Button className="rounded-r-lg bg-transparent hover:bg-amber-500">
                         Sign Up
                     </Button>
-                </Link></li>
+                </Link></li></>) }
+                
+                
             </div>
             </ul></>
     )
