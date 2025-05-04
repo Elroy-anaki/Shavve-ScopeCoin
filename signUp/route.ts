@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {createUser} from "@/db/api/users/requests"
+import {signUp} from "@/db/api/auth/requests"
 
 
 export async function POST(request: NextRequest) {
     try {
         console.log("POST")
         const body = await request.json(); 
-          const newUser = await createUser(body)
+          const newUser = await signUp(body)
           console.log("newUser", newUser)
           return NextResponse.json(body)
     } catch (error: any) {
