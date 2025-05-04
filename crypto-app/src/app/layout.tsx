@@ -5,8 +5,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { trpcClientComp } from '@/server/trpc.Provider';
 import { httpBatchLink } from '@trpc/client';
 import { Providers } from "./Providres";
+import { NavBar } from "@/components/ui/NavBar";
 
-
+import { Toaster } from "@/components/ui/sonner"
+import {AppToaster} from "@/providers/ToastProvider"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -34,15 +36,21 @@ export default function RootLayout({
       httpBatchLink({ url: '/api/trpc' }),
     ],
   });
+
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-      <Providers>
-
-        {children}
-      </Providers>
+        <Providers>
+          <header className="h-auto min-h-[9vh] w-full bg-gray-800 py-2 sm:py-3 md:py-4 flex items-center border-b-2 border-b-gray-300">
+            <NavBar />
+          </header>
+          <main className="flex-1 bg-gray-700 pt-12 sm:pt-16 md:pt-20">
+            {children}
+            <AppToaster />
+          </main>
+        </Providers>
       </body>
     </html>
   );
