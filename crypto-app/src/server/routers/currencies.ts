@@ -1,9 +1,7 @@
 import { convertAmount, getAllCurrencies, getAllSymbols } from "@/requests/external/openExchangeRate";
-import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from "../trpc";
 import { addUserCurrencySchema } from "@/validation/userCurrency";
 import { addCurrrencyForUser, deleteCurrencySymbolsFromUser, getCurrencySymbolsByUserId } from "@/requests/db/userCurrency";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/auth";
 import { z } from "zod";
 import { IConvertionResult } from "@/app/currencies/buildPage/ConvertSection";
 
