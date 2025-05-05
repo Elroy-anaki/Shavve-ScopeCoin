@@ -18,7 +18,9 @@ interface IEnvVars {
     OPEN_EXCHANGE_RATES_BASE_URL: string,
     OPEN_EXCHANGE_RATES_API_KEY: string,
     EXCHANGE_RATE_BASE_URL: string
-    EXCHANGE_RATE_API_KEY: string
+    EXCHANGE_RATE_API_KEY: string,
+    COIN_MARKET_BASE_URL: string,
+    COIN_MARKET_API_KEY: string
 
 }
 
@@ -37,8 +39,9 @@ export const envVars: IEnvVars = {
     EXCHANGE_RATE_API_KEY: process.env.EXCHANGE_RATE_API_KEY || "",
     EXCHANGE_RATE_BASE_URL: process.env.EXCHANGE_RATE_BASE_URL || "",
     ALPHA_VANTAGE_BASE_URL: process.env.ALPHA_VANTAGE_BASE_URL || "",
-    ALPHA_VANTAGE_API_KEY: process.env.ALPHA_VANTAGE_API_KEY || ""
+    ALPHA_VANTAGE_API_KEY: process.env.ALPHA_VANTAGE_API_KEY || "",
+    COIN_MARKET_BASE_URL: process.env.NEXT_PUBLIC_COIN_MARKET_BASE_URL || "",
+    COIN_MARKET_API_KEY: process.env.NEXT_PUBLIC_COIN_MARKET_API_KEY || ""
     
-
 }
 

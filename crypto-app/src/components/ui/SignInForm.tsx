@@ -17,12 +17,15 @@ import { signIn } from "next-auth/react";
 import { signInSchema } from "@/validation/auth/signIn.schema";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuthStore";
+import cryptoStore from '@/stores/cryptoStore';
+import currenciesStore from "@/stores/currenciesStore";
 
 type SignInData = z.infer<typeof signInSchema>;
 
 export default function SignInForm() {
   const router = useRouter();
   const auth = useAuth()
+
 
   const methods = useForm<SignInData>({
     resolver: zodResolver(signInSchema),

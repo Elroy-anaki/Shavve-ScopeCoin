@@ -1,0 +1,28 @@
+'use client';
+
+import { useEffect } from 'react';
+import cryptoStore from '@/stores/cryptoStore';
+import axios from 'axios';
+
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function CryptoProvider({ children }: Props) {
+  const setCryptoData = cryptoStore((state) => state.setCryptoData);
+
+  useEffect(() => {
+    const fetchCrypto = async () => {
+      try {
+        const { data } = await axios.get('/api/crypto');
+        setCryptoData(data);
+      } catch (err) {
+        console.error('Failed to fetch crypto data:', err);
+      }
+    };
+
+    fetchCrypto();
+  }, [setCryptoData]);
+
+  return <>{children}</>;
+}

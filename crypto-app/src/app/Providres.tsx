@@ -6,6 +6,9 @@ import { trpcClientComp } from '@/server/trpc.Provider';
 import { httpBatchLink } from '@trpc/client';
 import { ReactNode, useState } from 'react';
 import AuthProvider from "@/providers/AuthProvider"
+import CryptoProvider from '@/providers/CryptoProvider';
+import CurrenciesProvider from '@/providers/CurrenciesProvider';
+
 
 export function Providers({ children }: { children: ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -17,14 +20,17 @@ export function Providers({ children }: { children: ReactNode }) {
 
   return (
     <SessionProvider>
-    <trpcClientComp.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-
-        {children}
-      </AuthProvider>
-      </QueryClientProvider>
-    </trpcClientComp.Provider>
+      <trpcClientComp.Provider client={trpcClient} queryClient={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <CurrenciesProvider>
+            <CryptoProvider>
+              <AuthProvider>
+                {children}
+              </AuthProvider>
+            </CryptoProvider>
+          </CurrenciesProvider>
+        </QueryClientProvider>
+      </trpcClientComp.Provider>
     </SessionProvider>
   );
 }
