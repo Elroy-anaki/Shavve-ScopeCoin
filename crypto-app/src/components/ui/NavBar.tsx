@@ -7,10 +7,11 @@ import LogoutButton from "./LogoutButton"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import { trpcClientComp } from "@/server/trpc.Provider"
+ 
 
 export const NavBar = () => {
     const session = useSession();
-    const auth = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     
     const toggleMenu = () => {
@@ -18,6 +19,7 @@ export const NavBar = () => {
     };
     
     return (
+
         <>
             {/* Mobile menu button */}
             <div className="w-11/12 mx-auto md:hidden flex justify-end">
@@ -46,9 +48,9 @@ export const NavBar = () => {
                 {/* Navigation links */}
                 <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-4 items-center w-full md:w-auto">
                     <li> 
-                        <Link href={`/auth/signUp`}>
-                            <Button className="rounded-lg bg-transparent text-lg md:text-xl hover:bg-amber-500 w-full">
-                                Example 1
+                        <Link href={`/stockPrices`}>
+                            <Button  className="rounded-lg bg-transparent text-lg md:text-xl hover:bg-amber-500 w-full">
+                                Stock Prices
                             </Button>
                         </Link>
                     </li>

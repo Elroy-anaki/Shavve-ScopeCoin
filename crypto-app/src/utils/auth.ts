@@ -1,4 +1,4 @@
-import NextAuth, { getServerSession, NextAuthOptions, SessionStrategy } from "next-auth"
+import NextAuth, { getServerSession, NextAuthOptions, SessionStrategy, User } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { db } from "@/db/index"
 import bcrypt from "bcrypt"
@@ -19,7 +19,6 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        console.log("HIIIIII NEXTAUTH")
         const user = await db
           .select()
           .from(users)
@@ -44,7 +43,7 @@ export const authOptions: NextAuthOptions = {
           id: user[0].id.toString(),
           email: user[0].userEmail,
           name: user[0].userName,
-        }
+        } as User
       },
     }),
   ],
