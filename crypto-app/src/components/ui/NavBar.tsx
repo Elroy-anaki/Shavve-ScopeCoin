@@ -48,16 +48,16 @@ export const NavBar = () => {
                 {/* Navigation links */}
                 <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-4 items-center w-full md:w-auto">
                     <li> 
-                        <Link href={`/stockPrices`}>
+                        <Link href={`/stocks`}>
                             <Button  className="rounded-lg bg-transparent text-lg md:text-xl hover:bg-amber-500 w-full">
                                 Stock Prices
                             </Button>
                         </Link>
                     </li>
                     <li> 
-                        <Link href={`/auth/signUp`}>
+                        <Link href={`/currencies`}>
                             <Button className="rounded-lg bg-transparent text-xl md:text-2xl hover:bg-amber-500 w-full">
-                                Example 2
+                            Currencies
                             </Button>
                         </Link>
                     </li>

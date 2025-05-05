@@ -12,6 +12,8 @@ interface IEnvVars {
     DB_URL: string,
     HASH_SALT: number
     BASE_URL: string,
+    ALPHA_VANTAGE_BASE_URL: string,
+    ALPHA_VANTAGE_API_KEY: string,
 
     OPEN_EXCHANGE_RATES_BASE_URL: string,
     OPEN_EXCHANGE_RATES_API_KEY: string,
@@ -33,8 +35,10 @@ export const envVars: IEnvVars = {
     OPEN_EXCHANGE_RATES_BASE_URL: process.env.OPEN_EXCHANGE_RATES_BASE_URL || "",
     OPEN_EXCHANGE_RATES_API_KEY: process.env.OPEN_EXCHANGE_RATES_API_KEY || "",
     EXCHANGE_RATE_API_KEY: process.env.EXCHANGE_RATE_API_KEY || "",
-    EXCHANGE_RATE_BASE_URL: process.env.EXCHANGE_RATE_BASE_URL || ""
-
+    EXCHANGE_RATE_BASE_URL: process.env.EXCHANGE_RATE_BASE_URL || "",
+    ALPHA_VANTAGE_BASE_URL: process.env.ALPHA_VANTAGE_BASE_URL || "",
+    ALPHA_VANTAGE_API_KEY: process.env.ALPHA_VANTAGE_API_KEY || ""
+    
 
 }
 
