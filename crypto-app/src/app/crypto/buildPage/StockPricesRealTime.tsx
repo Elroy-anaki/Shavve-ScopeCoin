@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ReactEventHandler, useEffect, useState } from "react";
 
 // Updated interface to match the actual data structure from the WebSocket
 interface Crypto {
@@ -41,7 +41,8 @@ import {
     TableRow,
   } from "@/components/ui/table"
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { trpcClientComp } from "@/server/trpc.Provider";
+import { toast } from "sonner";
 
   
 export  function StockPricesRealTime() {
@@ -49,6 +50,17 @@ export  function StockPricesRealTime() {
   const [cryptos, setCryptos] = useState<Crypto[]>([]);
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const [toCurrency, setToCurrency] = useState<string>("USD")
+  const addCryptoForUser = trpcClientComp.cryptoRouter.addCryptoForUser.useMutation();
+
+  const addCrypto = async (crypto: string) => {
+    try {
+      await addCryptoForUser.mutateAsync({crypto})
+      toast(`${crypto} added succesfully`)
+    } catch (error) {
+      console.log(error)
+      toast("failed adding crypto for user")
+    }
+  }
 
   // Function to format Unix timestamp to readable date
   const formatTimestamp = (timestamp: number): string => {
@@ -115,8 +127,7 @@ export  function StockPricesRealTime() {
     socket.onmessage = (message) => {
       const data = JSON.parse(message.data);
       
-      console.log("Received data from WebSocket:", data);
-
+      
       // Only process messages with TYPE 5 (price updates)
       if (data.TYPE === "5") {
         setLastUpdate(new Date());
@@ -185,7 +196,7 @@ export  function StockPricesRealTime() {
               <TableRow key={crypto.FROMSYMBOL} className="bg-gray-800/50 border-gray-700">
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-2">
-                    <span className="text-white" onClick={() => alert(crypto.FROMSYMBOL)}>@</span>
+                    <span className="text-white" onClick={() => addCrypto(crypto.FROMSYMBOL)}>@</span>
                     <span className="bg-purple-800/30 rounded-md px-2 py-1">{crypto.FROMSYMBOL}</span>
                   </div>
                 </TableCell>
