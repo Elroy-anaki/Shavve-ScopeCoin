@@ -25,7 +25,10 @@ type SignUpData = z.infer<typeof signUpSchema>;
 export default function SignUpForm() {
   
   const signUpReq = trpcClientComp.auth.signUp.useMutation()
-  const router = useRouter();
+  const stockQuery = trpcClientComp.stockPrices.fetchStockPriceBySymbol.useQuery(
+    { name: "Tesla" },
+    { enabled: false }
+  );  const router = useRouter();
 
   const methods = useForm<SignUpData>({
     resolver: zodResolver(signUpSchema),
@@ -45,7 +48,19 @@ export default function SignUpForm() {
   return (
     <div className="max-w-full sm:max-w-md mx-auto p-2 sm:p-4">
 
-      <h1 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-center">Sign Up</h1>
+      <h1 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-center" onClick={async () => {
+                                try {
+                                    const res = await stockQuery.refetch();
+                                    console.log(res.data)
+                                    const lastRefreshed = res.data["Meta Data"]["3. Last Refreshed"]
+                                    console.log("res", res.data['Time Series (Daily)'][lastRefreshed])
+                                    
+                                } catch (error) {
+                                    alert("error")
+                                    console.log(error)
+                                    
+                                }
+                            }}>Sign Up</h1>
       
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
