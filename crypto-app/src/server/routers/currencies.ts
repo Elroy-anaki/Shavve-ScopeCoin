@@ -36,7 +36,6 @@ export const currenciesRouter = router({
         try {
         console.log(input)
           const userId = Number(input.userId);  // should be available now
-          console.log("User ID from ctx:", userId);
           const symbols = await getCurrencySymbolsByUserId(userId);
           return symbols;
         } catch (error) {
@@ -45,7 +44,7 @@ export const currenciesRouter = router({
       }),
       deleteCurrencySymbolsFromUser : publicProcedure.input(z.object({symbol: z.string(), userId: z.number().int().positive()})).mutation(async({input}) => {
         try {
-            const deletedCurrency = await deleteCurrencySymbolsFromUser(input.symbol, input.userId)
+            await deleteCurrencySymbolsFromUser(input.symbol, input.userId)
         } catch (error) {
             throw error
         }

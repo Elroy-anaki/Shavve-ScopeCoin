@@ -8,7 +8,7 @@ export const appRouter = router({
     auth: authRouter,
     stockPrices: stockPricesRouter,
     currencies: currenciesRouter,
-    cryptoRouter: cryptoRouter
+    cryptos: cryptoRouter
   });
 
 export type AppRouter = typeof appRouter;
