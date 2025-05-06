@@ -1,9 +1,9 @@
 'use client'
 
-import { AllCurrenciesSymbols } from "@/app/currencies/buildPage/AllCurrencySymbols"
+import { AllCurrenciesSymbols } from "@/components/dashborad/currencies/AllCurrencySymbols"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { trpcClientComp } from "@/server/trpc.Provider"
+import { trpcClientComp } from "@/server/trpcProvider"
 import cryptoStore from "@/stores/cryptoStore"
 import currenciesStore from "@/stores/currenciesStore"
 import { useState } from "react"

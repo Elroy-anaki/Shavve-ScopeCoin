@@ -1,4 +1,4 @@
-import { router } from "./trpc";
+import { router } from "./trpcConfig";
 import { authRouter } from "./routers/auth";
 import { stockPricesRouter } from "./routers/stockPrices";
 import { currenciesRouter } from "./routers/currencies";

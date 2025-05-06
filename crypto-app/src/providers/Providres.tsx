@@ -2,7 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { trpcClientComp } from '@/server/trpc.Provider';
+import { trpcClientComp } from '@/server/trpcProvider';
 import { httpBatchLink } from '@trpc/client';
 import { ReactNode, useState } from 'react';
 import AuthProvider from "@/providers/AuthProvider"

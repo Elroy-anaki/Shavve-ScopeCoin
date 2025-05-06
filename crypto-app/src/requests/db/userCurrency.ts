@@ -1,6 +1,6 @@
-import { db } from "@/db";
-import { NewUserCurrency, UserCurrency, userCurrency } from "@/db/schema/userCurrency";
-import { authOptions } from "@/utils/auth";
+import { db } from "@/config/db";
+import { NewUserCurrency, UserCurrency, userCurrency } from "@/config/db/schema/userCurrency";
+import { authOptions } from "@/utils/auth/auth";
 import { and, eq } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 

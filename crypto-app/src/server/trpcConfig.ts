@@ -1,11 +1,10 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/auth";
+import { authOptions } from "@/utils/auth/auth";
 import { initTRPC, TRPCError } from "@trpc/server";
-import type { FetchCreateContextFnOptions } from "@trpc/server/adapters/fetch";
-import { getSession } from 'next-auth/react';
-import { cookies } from "next/headers";
 
 
+
+// Create the context per request (doesn't work please help me!!!!!)
 export const createContext = async () => {
   const session = await getServerSession(authOptions);
 

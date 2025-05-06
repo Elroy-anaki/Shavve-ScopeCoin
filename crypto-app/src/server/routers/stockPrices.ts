@@ -1,5 +1,5 @@
 import { getSymbolByName, fetchStockPriceBySymbol } from '@/requests/external/alphaVantage';
-import { publicProcedure, router } from '../trpc';
+import { publicProcedure, router } from '../trpcConfig';
 import { z } from 'zod';
 
 

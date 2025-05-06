@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect } from 'react'
 import { getSession } from 'next-auth/react'
-import { useAuthStore } from '@/stores/auth.store'
+import { useAuthStore } from '@/stores/authStore'
 
 
 export default function AuthProvider({ children }: {children: ReactNode}) {

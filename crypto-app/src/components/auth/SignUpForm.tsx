@@ -13,10 +13,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import axios from 'axios'
-import {trpcClientComp} from "@/server/trpc.Provider"
-import { signUpSchema } from "@/validation/auth/signUp.schema";
+import {trpcClientComp} from "@/server/trpcProvider"
+import { signUpSchema } from "@/validation/auth/signUpSchema";
 import { useRouter } from 'next/navigation';
 import { toast } from "sonner";
+import  Link  from "next/link";
 
 
 
@@ -120,7 +121,10 @@ export default function SignUpForm() {
           </Button>
         </form>
       </FormProvider>
-      
+      <div className="w-full flex justify-center items-center gap-5 pt-6">
+        <p className="text-white text-base">Already have account? </p>
+        <Link href={`/auth/signIn`}><Button className="bg-transparent text-purple-400 font-bold cursor-pointer hover:text-purple-300">Sign In here</Button></Link>
+      </div>
     </div>
   );
 }

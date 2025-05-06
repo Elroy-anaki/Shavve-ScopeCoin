@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { trpcClientComp } from "@/server/trpc.Provider";
+import { trpcClientComp } from "@/server/trpcProvider";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { AllCurrenciesSymbols } from "./AllCurrencySymbols";
 
-export function CurrencyExchageRates({
+export function CurrencyExchageRatesSection({
   baseCurrency,
   symbols,
   allCurrenciesData

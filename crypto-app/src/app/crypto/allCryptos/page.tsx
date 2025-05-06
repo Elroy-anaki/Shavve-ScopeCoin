@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button"
 import { CryptosRealTimeTable } from "@/components/dashborad/crypto/CryptosRealTimeTable";
 import Link from "next/link"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/utils/auth"
-import { trpcServerComp } from "@/server/trpc.Provider"
+import { authOptions } from "@/utils/auth/auth"
+import { trpcServerComp } from "@/server/trpcProvider"
 import { redirect } from "next/navigation"
 import { ConvertCryptoSection } from "@/components/dashborad/crypto/ConvertCryptoSection"
 

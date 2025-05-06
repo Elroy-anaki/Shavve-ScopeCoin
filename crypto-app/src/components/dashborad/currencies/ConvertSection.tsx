@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
-import { AllCurrenciesSymbols } from "./AllCurrencySymbols"
+import { AllCurrenciesSymbols } from "../../../components/dashborad/currencies/AllCurrencySymbols"
 import { toast } from "sonner"
-import { trpcClientComp } from "@/server/trpc.Provider"
+import { trpcClientComp } from "@/server/trpcProvider"
 
 export interface IConvertionResult {
     conversion_rate: number,
