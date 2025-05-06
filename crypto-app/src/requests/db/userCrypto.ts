@@ -1,5 +1,5 @@
 import { db } from "@/config/db";
-import {UserCrypto, userCrypto, NewUserCrypto} from "@/config/db/schema/userCrypto"
+import { userCrypto} from "@/config/db/schema/userCrypto"
 import { authOptions } from "@/utils/auth/auth";
 import {  and, eq, inArray } from "drizzle-orm";
 import { getServerSession } from "next-auth";
@@ -7,7 +7,6 @@ import { getServerSession } from "next-auth";
 export const addCryptoForUser = async(crypto: string) => {
     try {
         const session = await getServerSession(authOptions)
-        console.log(session)
         const cryptoToAdd = {cryptoSymbol: crypto, userId: Number(session?.user.id) }
         await db.insert(userCrypto).values(cryptoToAdd);
     } catch (error) {
@@ -18,7 +17,6 @@ export const addCryptoForUser = async(crypto: string) => {
 
 export const getFavoritesCryptos = async(userId: number) => {
     try {
-        
         const favoritesCryptos = await db.select({
             crypto: userCrypto.cryptoSymbol
         }).from(userCrypto).where(eq(userCrypto.userId, userId))

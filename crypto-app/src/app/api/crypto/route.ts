@@ -1,4 +1,3 @@
-// app/api/crypto/route.ts
 import { NextResponse } from 'next/server';
 import { envVars } from '@/config/envVars/envVars.config';
 import axios from 'axios';

@@ -1,5 +1,5 @@
-import { string, z } from "zod";
-import { publicProcedure, router, protectedProcedure } from "../trpcConfig";
+import { z } from "zod";
+import { publicProcedure, router} from "../trpcConfig";
 import { addCryptoForUser, deleteFavoriteCryptos, getFavoritesCryptos } from "@/requests/db/userCrypto";
 import { convertCrypto } from "@/requests/external/coinMarket";
 
@@ -31,10 +31,9 @@ export const cryptoRouter = router({
     }),
     convertCrypto: publicProcedure.input(z.object({base: z.string(), target: z.string(), amount: z.number().positive()})).mutation(async({input}) => {
         try {
-            const res = await convertCrypto(input.base, input.target, input.amount)
-            return res
+            const convertingResult = await convertCrypto(input.base, input.target, input.amount)
+            return convertingResult
         } catch (error) {
-            console.log(error)
             throw error
         }
     })
