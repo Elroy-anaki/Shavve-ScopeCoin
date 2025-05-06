@@ -35,6 +35,7 @@ export function ForgotPasswordSection() {
                             }
                           });
                     } catch (error) {
+                        console.error(error)
                         toast("Sending email operation failed!", {
                             style: {
                               backgroundColor: "#DC2626",

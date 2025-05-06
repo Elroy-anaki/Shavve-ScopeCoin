@@ -40,6 +40,7 @@ export function ResetPasswordSection({resetPasswordId}: IResetPasswordSection){
                           });
                           router.replace(`/auth/signIn`)
                     } catch (error) {
+                        console.error(error)
                         toast("Changing password operation failed!", {
                             style: {
                               backgroundColor: "#DC2626",

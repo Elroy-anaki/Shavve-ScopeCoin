@@ -12,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import axios from 'axios'
 import {trpcClientComp} from "@/server/trpcProvider"
 import { signUpSchema } from "@/validation/auth/signUpSchema";
 import { useRouter } from 'next/navigation';

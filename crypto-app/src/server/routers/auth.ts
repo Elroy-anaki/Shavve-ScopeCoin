@@ -1,8 +1,8 @@
 import { signUpSchema } from '@/validation/auth/signUpSchema';
 import { publicProcedure, router } from '../trpcConfig';
-import {  resetPassword, signUp, verifyAccount } from '@/config/db/api/auth/requests';
+import {  resetPassword, signUp, verifyAccount } from '@/requests/db/auth/requests';
 import { z } from 'zod';
-import { sendResetPasswordMail } from '@/config/db/api/auth/requests';
+import { sendResetPasswordMail } from '@/requests/db/auth/requests';
 import { resetPasswordSchema } from '@/validation/auth/resetPasswordSchema';
 
 

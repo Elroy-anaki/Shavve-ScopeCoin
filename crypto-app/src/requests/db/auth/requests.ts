@@ -2,7 +2,6 @@ import { db } from '@/config/db/index'
 import { User, users } from "@/config/db/schema"
 import bcrypt from 'bcrypt';
 import { envVars } from '@/config/envVars/envVars.config';
-import { SignInInput } from '@/validation/auth/signInSchema';
 import { SignUpInput } from '@/validation/auth/signUpSchema';
 import { eq } from 'drizzle-orm';
 import { sendVerfiyAccountEmail } from '@/utils/auth/emailsUtils';

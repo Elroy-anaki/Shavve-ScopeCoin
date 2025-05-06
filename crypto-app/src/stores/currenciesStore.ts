@@ -1,8 +1,8 @@
 import {create} from 'zustand';
 
 type ICurrenciesState = {
-    currenciesData: Object | null;
-  setCurrenciesData: (data:Object) => void
+    currenciesData: Record<string, string> | null;
+  setCurrenciesData: (data:Record<string, string>) => void
 }
 
 const currenciesStore = create<ICurrenciesState>((set) => ({

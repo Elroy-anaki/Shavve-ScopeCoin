@@ -68,6 +68,7 @@ export function CurrencyExchageRatesSection({
       setAddCurrenyOpen(false);
       setCurrencyToAdd("");
     } catch (error) {
+      console.error(error)
       toast(`Adding ${currencyToAdd} failed!`, {
         style: {
           backgroundColor: "#DC2626", 
@@ -93,6 +94,7 @@ export function CurrencyExchageRatesSection({
       });
       refetch();
     } catch (error) {
+      console.error(error)
       toast.error(`Deleting ${currencySymbol} failed!`);
     }
   };

@@ -453,7 +453,7 @@ export function CryptosRealTimeTable({
                     <TableCell colSpan={isFavorite ? 9 : 8} className="text-center py-12 text-gray-400">
                       {searchTerm ? (
                         <div>
-                          <p className="text-lg">No cryptocurrencies match "{searchTerm}"</p>
+                          <p className="text-lg">No cryptocurrencies match {searchTerm}</p>
                           <p className="text-sm mt-2">Try a different search term</p>
                         </div>
                       ) : (
