@@ -1,6 +1,6 @@
 import { createInsertSchema } from 'drizzle-zod';
 import { z } from "zod";
-import { users } from "@/db/schema";
+import { users } from "@/config/db/schema";
 
 export const signUpSchema = createInsertSchema(users, {
   userName: z.string().min(2, { message: "user name must be at least 2 chars" }),

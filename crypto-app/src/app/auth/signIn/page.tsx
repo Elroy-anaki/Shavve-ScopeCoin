@@ -1,6 +1,6 @@
-import SignInForm from "@/components//ui/SignInForm"
-import LogoutButton from "@/components/ui/LogoutButton"
-import { authOptions, isSession } from "@/utils/auth"
+import SignInForm from "@/components/auth/SignInForm"
+import LogoutButton from "@/components/auth/LogoutButton"
+import { authOptions, isSession } from "@/utils/auth/auth"
 import { redirect } from "next/navigation"
 import {SignInPage} from "./SignInPage"
 

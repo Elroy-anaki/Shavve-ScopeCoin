@@ -1,9 +1,9 @@
 import { convertAmount, getAllCurrencies, getAllSymbols } from "@/requests/external/openExchangeRate";
-import { publicProcedure, router } from "../trpc";
-import { addUserCurrencySchema } from "@/validation/userCurrency";
+import { publicProcedure, router } from "../trpcConfig";
+import { addUserCurrencySchema } from "@/validation/currencies/userCurrency";
 import { addCurrrencyForUser, deleteCurrencySymbolsFromUser, getCurrencySymbolsByUserId } from "@/requests/db/userCurrency";
 import { z } from "zod";
-import { IConvertionResult } from "@/app/currencies/buildPage/ConvertSection";
+import { IConvertionResult } from "@/components/dashborad/currencies/ConvertSection";
 
 
 

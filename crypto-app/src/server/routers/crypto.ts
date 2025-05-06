@@ -1,5 +1,5 @@
 import { string, z } from "zod";
-import { publicProcedure, router, protectedProcedure } from "../trpc";
+import { publicProcedure, router, protectedProcedure } from "../trpcConfig";
 import { addCryptoForUser, deleteFavoriteCryptos, getFavoritesCryptos } from "@/requests/db/userCrypto";
 import { convertCrypto } from "@/requests/external/coinMarket";
 

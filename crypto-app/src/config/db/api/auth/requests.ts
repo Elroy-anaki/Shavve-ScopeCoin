@@ -1,10 +1,9 @@
-import { db } from '@/db/index'
-import { NewUser } from "@/db/schema/index"
-import { users } from "@/db/schema"
+import { db } from '@/config/db/index'
+import { users } from "@/config/db/schema"
 import bcrypt from 'bcrypt';
 import { envVars } from '@/config/envVars/envVars.config';
-import { SignInInput } from '@/validation/auth/signIn.schema';
-import { SignUpInput } from '@/validation/auth/signUp.schema';
+import { SignInInput } from '@/validation/auth/signInSchema';
+import { SignUpInput } from '@/validation/auth/signUpSchema';
 import { eq } from 'drizzle-orm';
 
 export const signUp = async (data: SignUpInput) => {

@@ -1,6 +1,6 @@
-import { db } from "@/db";
-import {UserCrypto, userCrypto, NewUserCrypto} from "@/db/schema/userCrypto"
-import { authOptions } from "@/utils/auth";
+import { db } from "@/config/db";
+import {UserCrypto, userCrypto, NewUserCrypto} from "@/config/db/schema/userCrypto"
+import { authOptions } from "@/utils/auth/auth";
 import {  and, eq, inArray } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 

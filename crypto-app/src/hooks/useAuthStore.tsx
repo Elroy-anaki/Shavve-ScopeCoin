@@ -1,3 +1,3 @@
-import { useAuthStore } from '@/stores/auth.store'
+import { useAuthStore } from '@/stores/authStore'
 
 export const useAuth = () => useAuthStore((state) => state)

@@ -1,7 +1,7 @@
-import { trpcServerComp } from "@/server/trpc.Provider";
-import { CurrenciesPage } from "./buildPage/CurrenciesPage";
+import { trpcServerComp } from "@/server/trpcProvider";
+import { CurrenciesPage } from "./CurrenciesPage";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/auth";
+import { authOptions } from "@/utils/auth/auth";
 import { redirect } from "next/navigation";
 
 export default async function Page(){

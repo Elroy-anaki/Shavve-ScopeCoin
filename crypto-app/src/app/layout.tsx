@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { trpcClientComp } from '@/server/trpc.Provider';
-import { httpBatchLink } from '@trpc/client';
-import { Providers } from "./Providres";
+import { Providers } from "../providers/Providres";
 import { NavBar } from "@/components/ui/NavBar";
 
-import { Toaster } from "@/components/ui/sonner"
 import {AppToaster} from "@/providers/ToastProvider"
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,12 +26,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
-  const trpcClient = trpcClientComp.createClient({
-    links: [
-      httpBatchLink({ url: '/api/trpc' }),
-    ],
-  });
 
   return (
     <html lang="en">

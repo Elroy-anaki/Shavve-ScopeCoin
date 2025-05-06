@@ -13,19 +13,15 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input";
-import { trpcClientComp } from "@/server/trpc.Provider";
+import { trpcClientComp } from "@/server/trpcProvider";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { formatNumber, formatPercentChange, formatTimestamp, getPriceChangeStatus } from "./utils";
-import { SelectCrypto } from "../SelectCrypto";
-import cryptoStore from "@/stores/cryptoStore";
-import CryptoChart from "../CryptoChart";
+import { formatNumber, formatPercentChange, formatTimestamp, getPriceChangeStatus } from "@/utils/client/crypto/utils";
+import CryptoChart from "./CryptoChart";
 
 // Clean interface that matches WebSocket data structure
 interface Crypto {

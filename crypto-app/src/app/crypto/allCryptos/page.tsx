@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button"
-import { CryptosRealTimeTable } from "../buildPage/CryptosRealTimeTable"
+import { CryptosRealTimeTable } from "@/components/dashborad/crypto/CryptosRealTimeTable";
 import Link from "next/link"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/utils/auth"
-import { trpcServerComp } from "@/server/trpc.Provider"
+import { authOptions } from "@/utils/auth/auth"
+import { trpcServerComp } from "@/server/trpcProvider"
 import { redirect } from "next/navigation"
-import { ConvertCryptoPage } from "../convert/ConvertCryptoPage"
+import { ConvertCryptoSection } from "@/components/dashborad/crypto/ConvertCryptoSection"
 
 export default async function AllCryptosPage() {
   // Get user session and favorites
@@ -22,8 +22,6 @@ export default async function AllCryptosPage() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      
-      
       {/* Main content */}
       <div className="container mx-auto p-4">
         {/* Navigation tabs */}
@@ -35,8 +33,7 @@ export default async function AllCryptosPage() {
           </Link>
           <Link href="/crypto/allCryptos">
             <Button 
-            disabled
-              
+            disabled   
              className="bg-gray-800 hover:bg-purple-700 text-white border border-purple-500/30 px-6 py-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20"
             >
               All Cryptos
@@ -63,7 +60,7 @@ export default async function AllCryptosPage() {
               <div className="bg-gradient-to-r from-purple-900 to-purple-800 py-3 px-4">
                 <h2 className="text-xl font-bold text-white text-center">Crypto Converter</h2>
               </div>
-              <ConvertCryptoPage />
+              <ConvertCryptoSection />
             </div>
           </div>
         </div>

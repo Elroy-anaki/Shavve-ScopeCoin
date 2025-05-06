@@ -1,6 +1,6 @@
-import { signUpSchema } from '@/validation/auth/signUp.schema';
-import { publicProcedure, router } from '../trpc';
-import { signUp } from '@/db/api/auth/requests';
+import { signUpSchema } from '@/validation/auth/signUpSchema';
+import { publicProcedure, router } from '../trpcConfig';
+import { signUp } from '@/config/db/api/auth/requests';
 
 export const authRouter = router({
   signUp: publicProcedure

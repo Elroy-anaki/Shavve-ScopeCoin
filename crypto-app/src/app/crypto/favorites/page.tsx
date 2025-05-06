@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button"
-import { CryptosRealTimeTable } from "../buildPage/CryptosRealTimeTable"
+import { CryptosRealTimeTable } from "@/components/dashborad/crypto/CryptosRealTimeTable"
 import Link from "next/link"
-import { trpcServerComp } from "@/server/trpc.Provider"
+import { trpcServerComp } from "@/server/trpcProvider"
 import { getServerSession } from "next-auth"
-import { authOptions, isSession } from "@/utils/auth"
+import { authOptions} from "@/utils/auth/auth"
 import { redirect } from "next/navigation"
-import { ConvertCryptoPage } from "../convert/ConvertCryptoPage"
+import { ConvertCryptoSection } from "@/components/dashborad/crypto/ConvertCryptoSection"
 
 export default async function FavoritesPage() {
 
@@ -23,8 +23,6 @@ export default async function FavoritesPage() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      
-      
       {/* Main content */}
       <div className="container mx-auto p-4">
         {/* Navigation tabs */}
@@ -64,7 +62,7 @@ export default async function FavoritesPage() {
               <div className="bg-gradient-to-r from-purple-900 to-purple-800 py-3 px-4">
                 <h2 className="text-xl font-bold text-white text-center">Crypto Converter </h2>
               </div>
-              <ConvertCryptoPage />
+              <ConvertCryptoSection />
             </div>
           </div>
         </div>

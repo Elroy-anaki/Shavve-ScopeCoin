@@ -1,7 +1,7 @@
 // In your API handler file
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "@/server";
-import { createContext } from "@/server/trpc";
+import { createContext } from "@/server/trpcConfig";
 
 const handler = async (req: Request) => {
   return fetchRequestHandler({

@@ -14,11 +14,10 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner"
 import { signIn } from "next-auth/react";
-import { signInSchema } from "@/validation/auth/signIn.schema";
+import { signInSchema } from "@/validation/auth/signInSchema";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuthStore";
-import cryptoStore from '@/stores/cryptoStore';
-import currenciesStore from "@/stores/currenciesStore";
+import Link from "next/link";
 
 type SignInData = z.infer<typeof signInSchema>;
 
@@ -37,18 +36,24 @@ export default function SignInForm() {
       email: user.userEmail,
       password: user.userPassword,
     });
-    console.log(res)
+
     auth.setIsAuth(true)
     toast("Welcome back...", {
       style: {
-        backgroundColor: "#16a34a", // צבע ירוק (green-600)
+        backgroundColor: "#16a34a",
         color: "#fff"
-        
+
       }
     });
 
     if (res?.error) {
-      alert("האימייל או הסיסמה שגויים");
+      toast("Email or Password wrong", {
+        style: {
+          backgroundColor: "#DC2626",
+          color: "#fff"
+
+        }
+      });
     } else {
       router.push("/");
     }
@@ -68,9 +73,9 @@ export default function SignInForm() {
               <FormItem>
                 <FormLabel className="text-white text-lg sm:text-lg">Email Address</FormLabel>
                 <FormControl>
-                  <Input 
-                    {...field} 
-                    placeholder="email..." 
+                  <Input
+                    {...field}
+                    placeholder="email..."
                     className="text-sm sm:text-base p-2 sm:p-5 bg-white"
                   />
                 </FormControl>
@@ -86,10 +91,10 @@ export default function SignInForm() {
               <FormItem>
                 <FormLabel className="text-white text-lg sm:text-lg">Password</FormLabel>
                 <FormControl>
-                  <Input 
-                    type="password" 
-                    {...field} 
-                    placeholder="password..." 
+                  <Input
+                    type="password"
+                    {...field}
+                    placeholder="password..."
                     className="text-sm sm:text-base p-2 sm:p-5 bg-white"
                   />
                 </FormControl>
@@ -98,14 +103,22 @@ export default function SignInForm() {
             )}
           />
 
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="w-full cursor-pointer bg-purple-600 hover:bg-purple-500 py-2 sm:py-5 text-sm sm:text-lg mt-2 sm:mt-4 font-bold"
           >
             Sign In
           </Button>
         </form>
       </FormProvider>
+      <div className="w-full flex justify-start items-center gap-1 ">
+        <p className="text-white text-sm">forgot your password?</p>
+        <Link href={`/auth/signIn`}><Button className="bg-transparent text-purple-400 font-bold cursor-pointer hover:text-purple-300">Reset here</Button></Link>
+      </div>
+      <div className="w-full flex justify-center items-center gap-5 pt-6">
+        <p className="text-white text-base">Don't have account? </p>
+        <Link href={`/auth/signUp`}><Button className="bg-transparent text-purple-400 font-bold cursor-pointer hover:text-purple-300">Sign Up here</Button></Link>
+      </div>
     </div>
   );
 }

@@ -2,8 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "./button"
-import { useAuth } from "@/hooks/useAuthStore"
-import LogoutButton from "./LogoutButton"
+import LogoutButton from "../auth/LogoutButton"
 import { useSession } from "next-auth/react"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
@@ -20,7 +19,7 @@ export const NavBar = () => {
     return (
         <div className="w-full">
             {/* Desktop navbar */}
-            <div className="hidden md:flex w-11/12 mx-auto justify-between items-center py-4">
+            <div className="hidden md:flex w-11/12 mx-auto justify-between items-center py-2">
                 {/* Logo/Username section (left) */}
                 <div className="flex items-center gap-2">
                     <Link href={`/`}>

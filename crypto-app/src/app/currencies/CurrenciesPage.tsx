@@ -1,8 +1,8 @@
 
 'use client'
 
-import { CurrencyExchageRates } from "./CurrencyExchageRates"
-import { ConvertSection } from "./ConvertSection"
+import { CurrencyExchageRatesSection } from "../../components/dashborad/currencies/CurrencyExchageRatesSection"
+import { ConvertSection } from "@/components/dashborad/currencies/ConvertSection"
 import currenciesStore from "@/stores/currenciesStore"
 
 
@@ -27,7 +27,7 @@ export const CurrenciesPage = ({ baseCurrency, allCurrenciesData }: ICurrenciesP
         </p>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <CurrencyExchageRates 
+          <CurrencyExchageRatesSection 
             baseCurrency={baseCurrency} 
             symbols={currencies.currenciesData} 
             allCurrenciesData={allCurrenciesData}
