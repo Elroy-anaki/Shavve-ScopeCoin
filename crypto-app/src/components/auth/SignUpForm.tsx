@@ -36,7 +36,12 @@ export default function SignUpForm() {
   const onSubmit = async (user: SignUpData) => {
     try {
       await signUpReq.mutateAsync(user)
-      toast("Thanks for your registration. Sign in Please")
+      toast("Thanks for your registration. Check your email Please", {
+        style: {
+          backgroundColor: "#FFD700",
+          color: "#000000"
+        }
+      });
       router.replace("/auth/signIn");
     } catch (error) {
       alert("Error");

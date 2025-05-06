@@ -38,16 +38,11 @@ export default function SignInForm() {
     });
 
     auth.setIsAuth(true)
-    toast("Welcome back...", {
-      style: {
-        backgroundColor: "#16a34a",
-        color: "#fff"
-
-      }
-    });
+    console.log(res)
+    
 
     if (res?.error) {
-      toast("Email or Password wrong", {
+      toast("Access denied", {
         style: {
           backgroundColor: "#DC2626",
           color: "#fff"
@@ -55,6 +50,13 @@ export default function SignInForm() {
         }
       });
     } else {
+      toast("Welcome back...", {
+        style: {
+          backgroundColor: "#16a34a",
+          color: "#fff"
+  
+        }
+      });
       router.push("/");
     }
   };
@@ -113,7 +115,7 @@ export default function SignInForm() {
       </FormProvider>
       <div className="w-full flex justify-start items-center gap-1 ">
         <p className="text-white text-sm">forgot your password?</p>
-        <Link href={`/auth/signIn`}><Button className="bg-transparent text-purple-400 font-bold cursor-pointer hover:text-purple-300">Reset here</Button></Link>
+        <Link href={`/auth/forgotPassword`}><Button className="bg-transparent text-purple-400 font-bold cursor-pointer hover:text-purple-300">Reset here</Button></Link>
       </div>
       <div className="w-full flex justify-center items-center gap-5 pt-6">
         <p className="text-white text-base">Don't have account? </p>
