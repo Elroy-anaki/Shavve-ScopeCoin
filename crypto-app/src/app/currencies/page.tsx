@@ -6,12 +6,12 @@ import { redirect } from "next/navigation";
 
 export default async function Page(){
 
-   const session = await getServerSession(authOptions) // must
+   const session = await getServerSession(authOptions) 
            if(!session) {
             redirect(`/auth/signIn`)
                
            }
-   const data = await trpcServerComp.currencies.getAllCurrencies.query() // must
+   const data = await trpcServerComp.currencies.getAllCurrencies.query() 
    const baseCurrency = data.base;
 
 

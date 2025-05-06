@@ -25,10 +25,8 @@ type SignUpData = z.infer<typeof signUpSchema>;
 export default function SignUpForm() {
   
   const signUpReq = trpcClientComp.auth.signUp.useMutation()
-  const stockQuery = trpcClientComp.stockPrices.fetchStockPriceBySymbol.useQuery(
-    { name: "Tesla" },
-    { enabled: false }
-  );  const router = useRouter();
+  
+   const router = useRouter();
 
   const methods = useForm<SignUpData>({
     resolver: zodResolver(signUpSchema),
@@ -48,19 +46,7 @@ export default function SignUpForm() {
   return (
     <div className="max-w-full sm:max-w-md mx-auto p-2 sm:p-4">
 
-      <h1 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-center" onClick={async () => {
-                                try {
-                                    const res = await stockQuery.refetch();
-                                    console.log(res.data)
-                                    const lastRefreshed = res.data["Meta Data"]["3. Last Refreshed"]
-                                    console.log("res", res.data['Time Series (Daily)'][lastRefreshed])
-                                    
-                                } catch (error) {
-                                    alert("error")
-                                    console.log(error)
-                                    
-                                }
-                            }}>Sign Up</h1>
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center text-white" >Sign Up Please!</h1>
       
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
@@ -69,16 +55,16 @@ export default function SignUpForm() {
             name="userName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm sm:text-base">User Name</FormLabel>
+                <FormLabel className="text-white text-lg sm:text-lg">User Name</FormLabel>
                 <FormControl>
                   <Input 
                     {...field} 
                     placeholder="user name..." 
-                    className="text-sm sm:text-base p-2 sm:p-3" 
+                    className="text-sm sm:text-base p-2 sm:p-5 bg-white" 
                   />
                 </FormControl>
                 {methods.formState.errors.userName && (
-                  <FormMessage className="text-xs sm:text-sm">{methods.formState.errors.userName.message}</FormMessage>
+                  <FormMessage className="text-xs text-left sm:text-sm">{methods.formState.errors.userName.message}</FormMessage>
                 )}
               </FormItem>
             )}
@@ -89,16 +75,17 @@ export default function SignUpForm() {
             name="userEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm sm:text-base">Email Address</FormLabel>
+                <FormLabel className="text-white text-lg sm:text-lg">Email Address</FormLabel>
                 <FormControl>
                   <Input 
                     {...field} 
                     placeholder="email..." 
-                    className="text-sm sm:text-base p-2 sm:p-3" 
+                    className="text-sm sm:text-base p-2 sm:p-5 bg-white" 
+                    
                   />
                 </FormControl>
                 {methods.formState.errors.userEmail && (
-                  <FormMessage className="text-xs sm:text-sm">{methods.formState.errors.userEmail.message}</FormMessage>
+                  <FormMessage className="text-xs text-left sm:text-sm">{methods.formState.errors.userEmail.message}</FormMessage>
                 )}
               </FormItem>
             )}
@@ -109,17 +96,17 @@ export default function SignUpForm() {
             name="userPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm sm:text-base">User Password</FormLabel>
+                <FormLabel className="text-white text-lg sm:text-lg">User Password</FormLabel>
                 <FormControl>
                   <Input 
                     {...field} 
                     placeholder="password..." 
                     type="password" 
-                    className="text-sm sm:text-base p-2 sm:p-3" 
+                    className="text-sm sm:text-base p-2 sm:p-5 bg-white" 
                   />
                 </FormControl>
                 {methods.formState.errors.userPassword && (
-                  <FormMessage className="text-xs sm:text-sm">{methods.formState.errors.userPassword.message}</FormMessage>
+                  <FormMessage className="text-xs text-left sm:text-sm">{methods.formState.errors.userPassword.message}</FormMessage>
                 )}
               </FormItem>
             )}
@@ -127,7 +114,7 @@ export default function SignUpForm() {
 
           <Button 
             type="submit" 
-            className="w-full cursor-pointer py-2 sm:py-3 text-sm sm:text-base mt-2 sm:mt-4"
+            className="w-full cursor-pointer bg-purple-600 hover:bg-purple-500 py-2 sm:py-5 text-sm sm:text-lg mt-2 sm:mt-4 font-bold"
           >
             Sign Up
           </Button>

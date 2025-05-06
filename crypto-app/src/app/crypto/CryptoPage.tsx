@@ -8,20 +8,27 @@ import Link from "next/link";
 export const CryptoPage = () => { 
     return (
         <>
-        <div className="flex flex-col gap-6 p-4">
+        <div className="flex flex-col gap-6 p-4 ">
             <div className="flex justify-center items-center gap-4">
                 <Link href={`/crypto/favorites`}>
                 <Button 
-                    className="w-32"
-                >
+                    className="w-32 p-7 bg-white text-black hover:bg-purple-600 hover:text-white cursor-pointer"
+                    >
                     My Favorites
                 </Button>
                 </Link>
                 <Link href={`/crypto/allCryptos`}>
                 <Button 
-                    className="w-32"
-                >
+                    className="w-32 p-7 bg-white text-black hover:bg-purple-600 hover:text-white cursor-pointer"
+                    >
                     All Cryptos
+                </Button>
+                </Link>
+                <Link href={`/crypto/convert`}>
+                <Button 
+                    className="w-32 p-7 bg-white text-black hover:bg-purple-600 hover:text-white cursor-pointer"
+                >
+                    Convert
                 </Button>
                 </Link>
             </div>
