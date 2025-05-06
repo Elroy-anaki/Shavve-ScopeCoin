@@ -21,9 +21,10 @@ interface IEnvVars {
     EXCHANGE_RATE_API_KEY: string,
     COIN_MARKET_BASE_URL: string,
     COIN_MARKET_API_KEY: string,
-    GMAIL_SENDER: string,
+    EMAIL_SENDER: string,
     EMAIL_SENDER_PASSWORD: string,
-    EMAIL_SECURE: boolean
+    EMAIL_SECURE: boolean,
+    CLIENT_BASE_URL: string
 
 }
 
@@ -45,9 +46,10 @@ export const envVars: IEnvVars = {
     ALPHA_VANTAGE_API_KEY: process.env.ALPHA_VANTAGE_API_KEY || "",
     COIN_MARKET_BASE_URL: process.env.NEXT_PUBLIC_COIN_MARKET_BASE_URL || "",
     COIN_MARKET_API_KEY: process.env.NEXT_PUBLIC_COIN_MARKET_API_KEY || "",
-    GMAIL_SENDER: process.env.GMAIL_SENDER || "",
+    EMAIL_SENDER: process.env.GMAIL_SENDER || "",
     EMAIL_SENDER_PASSWORD: process.env.EMAIL_SENDER_PASSWORD || "",
-    EMAIL_SECURE: Boolean(process.env.EMAIL_SECURE )|| true
+    EMAIL_SECURE: Boolean(process.env.EMAIL_SECURE)|| true,
+    CLIENT_BASE_URL: process.env.CLIENT_BASE_URL || ""
     
 }
 

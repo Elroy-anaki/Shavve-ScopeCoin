@@ -6,7 +6,7 @@ export const transporter: Transporter = createTransport({
     port: 465,
     secure: envVars.EMAIL_SECURE,
     auth: {
-      user: String(envVars.GMAIL_SENDER), 
+      user: String(envVars.EMAIL_SENDER), 
       pass: String(envVars.EMAIL_SENDER_PASSWORD), 
     },
   });
