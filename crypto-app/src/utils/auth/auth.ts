@@ -37,6 +37,9 @@ export const authOptions: NextAuthOptions = {
         if (!isPasswordValid) {
           return null
         }
+        if(!user[0].isVerify){
+          return null
+        }
 
         
         return {

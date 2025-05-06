@@ -38,16 +38,11 @@ export default function SignInForm() {
     });
 
     auth.setIsAuth(true)
-    toast("Welcome back...", {
-      style: {
-        backgroundColor: "#16a34a",
-        color: "#fff"
-
-      }
-    });
+    console.log(res)
+    
 
     if (res?.error) {
-      toast("Email or Password wrong", {
+      toast("Access denied", {
         style: {
           backgroundColor: "#DC2626",
           color: "#fff"
@@ -55,6 +50,13 @@ export default function SignInForm() {
         }
       });
     } else {
+      toast("Welcome back...", {
+        style: {
+          backgroundColor: "#16a34a",
+          color: "#fff"
+  
+        }
+      });
       router.push("/");
     }
   };

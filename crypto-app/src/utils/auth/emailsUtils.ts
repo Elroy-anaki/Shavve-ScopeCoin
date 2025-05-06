@@ -20,8 +20,9 @@ export const sendWelcomeEmail = async (user: User) => {
 
 export const sendVerfiyAccountEmail = async (user: User, verifyAccountId: string) => {
     try {
-        const verifyEmailLink = `${envVars.CLIENT_BASE_URL}/auth/verifyEmail/${verifyAccountId}`
+        const verifyEmailLink = `${envVars.CLIENT_BASE_URL}/auth/verifyAccount/${verifyAccountId}`
         const template = verifyAccountEmailTemplate(user, verifyEmailLink)
+        console.log(envVars.EMAIL_SENDER, envVars.EMAIL_SENDER_PASSWORD)
         await transporter.sendMail({
             from: envVars.EMAIL_SENDER,
             to: user.userEmail,
@@ -29,6 +30,7 @@ export const sendVerfiyAccountEmail = async (user: User, verifyAccountId: string
             html: template
         })
     } catch (error) {
+        console.log(error)
         throw error
     }
 }
