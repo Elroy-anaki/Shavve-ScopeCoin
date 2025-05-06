@@ -16,22 +16,23 @@ import { toast } from "sonner"
 import {AllCurrenciesSymbols} from "./AllCurrencySymbols"
 import { CurrencyExchageRates } from "./CurrencyExchageRates"
 import { ConvertSection } from "./ConvertSection"
+import currenciesStore from "@/stores/currenciesStore"
 
 
 interface ICurrenciesPageProps {
   baseCurrency: string
-  symbols?: Record<string, string>
   allCurrenciesData: Record<any, number>[]
 }
 
-export const CurrenciesPage = ({ symbols, baseCurrency, allCurrenciesData}: ICurrenciesPageProps) => {
+export const CurrenciesPage = ({ baseCurrency, allCurrenciesData}: ICurrenciesPageProps) => {
+   const currencies = currenciesStore((state) => state)
   return (
     <div className="min-h-screen bg-gray-900 px-4 py-10 ">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold text-center text-purple-400 mb-10">Currency Exchange</h1>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <CurrencyExchageRates baseCurrency={baseCurrency} symbols={symbols} allCurrenciesData={allCurrenciesData}/>
-          <ConvertSection symbols={symbols} />
+          <CurrencyExchageRates baseCurrency={baseCurrency} symbols={currencies.currenciesData} allCurrenciesData={allCurrenciesData}/>
+          <ConvertSection symbols={currencies.currenciesData} />
         </div>
       </div>
     </div>

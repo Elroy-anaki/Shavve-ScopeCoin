@@ -1,9 +1,7 @@
 import { convertAmount, getAllCurrencies, getAllSymbols } from "@/requests/external/openExchangeRate";
-import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from "../trpc";
 import { addUserCurrencySchema } from "@/validation/userCurrency";
 import { addCurrrencyForUser, deleteCurrencySymbolsFromUser, getCurrencySymbolsByUserId } from "@/requests/db/userCurrency";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/auth";
 import { z } from "zod";
 import { IConvertionResult } from "@/app/currencies/buildPage/ConvertSection";
 
@@ -38,7 +36,6 @@ export const currenciesRouter = router({
         try {
         console.log(input)
           const userId = Number(input.userId);  // should be available now
-          console.log("User ID from ctx:", userId);
           const symbols = await getCurrencySymbolsByUserId(userId);
           return symbols;
         } catch (error) {
@@ -47,7 +44,7 @@ export const currenciesRouter = router({
       }),
       deleteCurrencySymbolsFromUser : publicProcedure.input(z.object({symbol: z.string(), userId: z.number().int().positive()})).mutation(async({input}) => {
         try {
-            const deletedCurrency = await deleteCurrencySymbolsFromUser(input.symbol, input.userId)
+            await deleteCurrencySymbolsFromUser(input.symbol, input.userId)
         } catch (error) {
             throw error
         }

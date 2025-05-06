@@ -6,9 +6,9 @@ import { getServerSession } from "next-auth";
 
 export const addCurrrencyForUser = async (currency: Omit<NewUserCurrency, "userId">) => {
     try {
-        const session = await getServerSession(authOptions)
-        const currencyToAdd = { ...currency, userId: Number(session?.user.id) }
-        await db.insert(userCurrency).values(currencyToAdd).returning()
+        const session = await getServerSession(authOptions);
+        const currencyToAdd = { ...currency, userId: Number(session?.user.id) };
+        await db.insert(userCurrency).values(currencyToAdd);
     } catch (error) {
         throw error
     }
