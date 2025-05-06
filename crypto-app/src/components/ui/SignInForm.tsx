@@ -39,7 +39,13 @@ export default function SignInForm() {
     });
     console.log(res)
     auth.setIsAuth(true)
-    toast.success("Welcome!")
+    toast("Welcome back...", {
+      style: {
+        backgroundColor: "#16a34a", // צבע ירוק (green-600)
+        color: "#fff"
+        
+      }
+    });
 
     if (res?.error) {
       alert("האימייל או הסיסמה שגויים");
@@ -50,22 +56,22 @@ export default function SignInForm() {
 
   return (
     <div className="px-3 sm:px-6 md:px-10 mx-auto w-full">
-      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center text-amber-500">Sign In</h1>
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center text-white">Sign In Please</h1>
 
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
 
           <FormField
             control={methods.control}
             name="userEmail"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-amber-500 text-sm sm:text-base">Email Address</FormLabel>
+                <FormLabel className="text-white text-lg sm:text-lg">Email Address</FormLabel>
                 <FormControl>
                   <Input 
                     {...field} 
                     placeholder="email..." 
-                    className="text-sm sm:text-base p-2 sm:p-3"
+                    className="text-sm sm:text-base p-2 sm:p-5 bg-white"
                   />
                 </FormControl>
                 <FormMessage className="text-xs sm:text-sm" />
@@ -78,13 +84,13 @@ export default function SignInForm() {
             name="userPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-amber-500 text-sm sm:text-base">Password</FormLabel>
+                <FormLabel className="text-white text-lg sm:text-lg">Password</FormLabel>
                 <FormControl>
                   <Input 
                     type="password" 
                     {...field} 
                     placeholder="password..." 
-                    className="text-sm sm:text-base p-2 sm:p-3"
+                    className="text-sm sm:text-base p-2 sm:p-5 bg-white"
                   />
                 </FormControl>
                 <FormMessage className="text-xs sm:text-sm" />
@@ -94,7 +100,7 @@ export default function SignInForm() {
 
           <Button 
             type="submit" 
-            className="w-full cursor-pointer bg-amber-600 hover:bg-amber-700 py-2 sm:py-3 text-sm sm:text-base mt-2 sm:mt-4"
+            className="w-full cursor-pointer bg-purple-600 hover:bg-purple-500 py-2 sm:py-5 text-sm sm:text-lg mt-2 sm:mt-4 font-bold"
           >
             Sign In
           </Button>

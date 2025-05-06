@@ -10,8 +10,14 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     await signOut({ redirect: false }); 
-    toast("Bye Bye...")
-    router.push("/auth/signIn"); 
+    toast("Bye Bye...", {
+      style: {
+        backgroundColor: "#DC2626", // צבע ירוק (green-600)
+        color: "#fff"
+        
+      }
+    });
+        router.push("/auth/signIn"); 
   };
 
   return (

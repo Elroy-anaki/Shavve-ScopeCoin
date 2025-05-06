@@ -1,10 +1,9 @@
 
-import SignUpForm from "../components/ui/SignUpForm";
 
 export default function Home() {
   return (
     <>
-    <div className="bg-red-500"> Home</div>
+    <div className="text-white text-7xl text-center py-20"> Welcome to CoinScope</div>
     </>
   );
 }

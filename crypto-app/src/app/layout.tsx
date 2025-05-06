@@ -43,10 +43,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Providers>
-          <header className="h-auto min-h-[9vh] w-full bg-gray-800 py-2 sm:py-3 md:py-4 flex items-center border-b-2 border-b-gray-300">
+          <header className="h-auto min-h-[9vh] w-full bg-gray-900 py-2 sm:py-3 md:py-4 flex items-center border-b-2 border-b-purple-600">
             <NavBar />
           </header>
-          <main className="flex-1 bg-gray-700 pt-12 sm:pt-16 md:pt-20">
+          <main className="flex-1 bg-gray-900 pt-12 sm:pt-0 ">
             {children}
             <AppToaster />
           </main>

@@ -1,7 +1,7 @@
 
 import { authOptions, isSession } from "@/utils/auth"
-import { CryptoPage } from "./CryptoPage"
 import { redirect } from "next/navigation"
+import CryptoChart from "./CryptoChart"
 
 export default async function Page() {
     const session = await isSession(authOptions)
@@ -11,7 +11,10 @@ export default async function Page() {
         }
     return (
         <>
-        <CryptoPage />
+        <div className="bg-gray-900">
+
+        <CryptoChart />
+        </div>
         </>
     )
 
