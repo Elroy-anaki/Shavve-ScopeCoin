@@ -1,9 +1,10 @@
 import { signUpSchema } from '@/validation/auth/signUpSchema';
 import { publicProcedure, router } from '../trpcConfig';
-import { getUserByEmail, getUserByVerifyAccountId, signUp, verifyAccount } from '@/config/db/api/auth/requests';
-import { verifyAccountSchema } from '@/validation/auth/verifyAccountSchema';
+import {  resetPassword, signUp, verifyAccount } from '@/config/db/api/auth/requests';
 import { z } from 'zod';
-import { sendVerfiyAccountEmail } from '@/utils/auth/emailsUtils';
+import { sendResetPasswordMail } from '@/config/db/api/auth/requests';
+import { resetPasswordSchema } from '@/validation/auth/resetPasswordSchema';
+
 
 export const authRouter = router({
   signUp: publicProcedure
@@ -17,18 +18,24 @@ export const authRouter = router({
       }
       
     }),
-    sendVerfiyAccountEmail: publicProcedure.input(verifyAccountSchema).mutation(async({input}) => {
-      try {
-        const user = await getUserByEmail(input.userEmail)
-      
-      } catch (error) {
-        throw error
-      }
-    }),
     verifyAccount: publicProcedure.input(z.object({id: z.string()})).mutation(async({input}) => {
       try {
        await verifyAccount(input.id)
        
+      } catch (error) {
+        throw error
+      }
+    }),
+    sendResetPasswordEmail: publicProcedure.input(z.object({userEmail: z.string()})).mutation(async({input}) => {
+      try {
+        await sendResetPasswordMail(input.userEmail)
+      } catch (error) {
+        throw error
+      }
+    }),
+    resetPassword: publicProcedure.input(resetPasswordSchema).mutation(async({input}) => {
+      try {
+        await resetPassword(input.resetPasswordId, input.userPassword)
       } catch (error) {
         throw error
       }

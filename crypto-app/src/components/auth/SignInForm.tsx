@@ -115,7 +115,7 @@ export default function SignInForm() {
       </FormProvider>
       <div className="w-full flex justify-start items-center gap-1 ">
         <p className="text-white text-sm">forgot your password?</p>
-        <Link href={`/auth/signIn`}><Button className="bg-transparent text-purple-400 font-bold cursor-pointer hover:text-purple-300">Reset here</Button></Link>
+        <Link href={`/auth/forgotPassword`}><Button className="bg-transparent text-purple-400 font-bold cursor-pointer hover:text-purple-300">Reset here</Button></Link>
       </div>
       <div className="w-full flex justify-center items-center gap-5 pt-6">
         <p className="text-white text-base">Don't have account? </p>
