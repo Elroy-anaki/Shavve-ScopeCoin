@@ -8,9 +8,9 @@ import cryptoStore from "@/stores/cryptoStore"
 import currenciesStore from "@/stores/currenciesStore"
 import { useState } from "react"
 import { toast } from "sonner"
-import { SelectCrypto } from "../SelectCrypto"
+import { SelectCrypto } from "./SelectCrypto"
 
-export const ConvertCryptoPage = () => {
+export const ConvertCryptoSection = () => {
     const [amount, setAmount] = useState<number>(1)
     const [base, setBase] = useState<string>("")
     const [target, setTarget] = useState<string>("")
