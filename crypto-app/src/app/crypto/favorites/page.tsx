@@ -14,7 +14,7 @@ export default async function FavoritesPage() {
   if(!session) {
     redirect(`/auth/signIn`)
   }
-  const favorites = session?.user.id
+  const favorites = session!.user.id
     ? await trpcServerComp.cryptos.getFavoritesCryptos.query({ userId: Number(session.user.id) })
     : []
     

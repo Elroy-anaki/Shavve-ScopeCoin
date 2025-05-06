@@ -8,12 +8,13 @@ import { redirect } from "next/navigation"
 import { ConvertCryptoSection } from "@/components/dashborad/crypto/ConvertCryptoSection"
 
 export default async function AllCryptosPage() {
+  
   // Get user session and favorites
   const session = await getServerSession(authOptions)
   if(!session) {
     redirect(`/auth/signIn`)
   }
-  const favorites = session?.user.id 
+  const favorites = session!.user.id 
     ? await trpcServerComp.cryptos.getFavoritesCryptos.query({ userId: Number(session.user.id) })
     : []
     

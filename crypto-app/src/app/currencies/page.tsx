@@ -9,11 +9,9 @@ export default async function Page(){
    const session = await getServerSession(authOptions) 
            if(!session) {
             redirect(`/auth/signIn`)
-               
            }
    const data = await trpcServerComp.currencies.getAllCurrencies.query() 
    const baseCurrency = data.base;
-
 
     return (
         <>
