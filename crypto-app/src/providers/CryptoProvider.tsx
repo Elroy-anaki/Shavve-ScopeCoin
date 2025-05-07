@@ -16,6 +16,7 @@ export default function CryptoProvider({ children }: Props) {
       try {
         const { data } = await axios.get('/api/crypto');
         setCryptoData(data);
+        console.log("cryptos", data)
       } catch (err) {
         console.error('Failed to fetch crypto data:', err);
       }

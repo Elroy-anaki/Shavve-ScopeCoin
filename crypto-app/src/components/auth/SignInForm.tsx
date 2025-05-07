@@ -57,7 +57,7 @@ export default function SignInForm() {
   
         }
       });
-      router.push("/");
+      router.replace("/");
     }
   };
 
