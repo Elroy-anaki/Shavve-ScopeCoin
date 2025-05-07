@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# ScopeCoin
 
-First, run the development server:
+## Table of Contents
+1. [Project Description](#project-description)
+2. [Tech Stack](#tech-stack)
+3. [Features](#features)
+4. [Installation](#installation)
+5. [API + Libraries](#api--libraries)
+6. [Live](#live)
+7. [Future Tasks](#future-tasks)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Project Description
+
+A mini application designed to allow users to:
+- Track cryptocurrency market trends
+- Convert between cryptocurrencies and fiat
+- Save preferences and favorite coins
+- Get real-time market data and currency values
+
+---
+
+## Tech Stack
+
+> _Fill this section with your selected technologies_
+
+Example:
+
+- **Frontend:** Next.js, TailwindCSS, Shadcn
+- **Backend:** Next.js API Routes, NextAuth.js
+- **Database:** PostgreSQL (Neon)
+- **APIs:** CoinMarketCap, Alpha Vantage, Open Exchange Rates
+- **Email:** Nodemailer 
+
+---
+
+## Features
+
+### 🔐 Authentication
+
+This project includes a complete authentication system:
+
+- **User Registration** – Users can sign up with email and password.
+- **Login & Logout** – Secure session management.
+- **Email Verification** – Validate email addresses post-registration.
+- **Forgot Password** – Secure password reset via email.
+
+### 📊 Dashboard
+
+The dashboard provides a personalized experience:
+
+- **Live Exchange Rates** – Real-time data on cryptocurrencies.
+- **Favorites** – Save preferred cryptocurrencies for quick access.
+- **Currency Conversion** – Convert between crypto and fiat instantly.
+- **Real-Time Data -> (Web Socket)** – Always up-to-date via API integrations.
+
+---
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# Database Configuration
+DB_HOST=your-db-host
+DB_PORT=your-db-port
+DB_USER=your-db-user
+DB_PASSWORD=your-db-password
+DB_NAME=your-db-name
+DB_SSL=true
+DB_URL=your-database-connection-url
+
+# Authentication & Security
+HASH_SALT=your-hash-salt
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-nextauth-secret
+
+# API Keys & External Services
+ALPHA_VANTAGE_BASE_URL=https://www.alphavantage.co
+ALPHA_VANTAGE_API_KEY=your-alpha-vantage-api-key
+
+OPEN_EXCHANGE_RATES_BASE_URL=https://openexchangerates.org/api
+OPEN_EXCHANGE_RATES_API_KEY=your-open-exchange-rates-api-key
+
+EXCHANGE_RATE_BASE_URL=https://v6.exchangerate-api.com/v6/
+EXCHANGE_RATE_API_KEY=your-exchange-rate-api-key
+
+NEXT_PUBLIC_COIN_MARKET_BASE_URL=https://pro-api.coinmarketcap.com
+NEXT_PUBLIC_COIN_MARKET_API_KEY=your-coinmarketcap-api-key
+
+# Email Configuration
+EMAIL_SENDER=your-email@example.com
+EMAIL_SENDER_PASSWORD=your-email-password
+EMAIL_SECURE=true
+
+# Client
+CLIENT_BASE_URL=http://localhost:3000
 ```
+## Installation
+### Clone repo 
+```
+git clone https://github.com/Elroy-anaki/Shavve.git
+```
+### Navigate to your folder 
+```
+cd your folder
+```
+### Install dependencies
+```
+npm install
+```
+### Run the server
+```
+npm run dev
+```
+## API + Libraries
+### API
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ - CoinMarketCap API
+ - Open Exchange Rates
+ -  Alpha Vantage
+### Libraries
+ - **Zod** – TypeScript-first schema validation library used for validating and parsing inputs, especially in tRPC procedures.
+ 
+- **NextAuth.js** – Complete open-source authentication solution for Next.js applications, supporting email/password, OAuth, and more.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **tRPC** – Enables end-to-end typesafe APIs in Next.js without requiring REST or GraphQL, simplifying client-server communication with full type safety.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Nodemailer** – A module for Node.js to send emails. It supports various transport methods including SMTP, and is often used for sending confirmation emails, password resets, and notifications.
 
-## Learn More
+- **etc.**
 
-To learn more about Next.js, take a look at the following resources:
+## Live
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The application is deployed on Vercel. You can access it here: [Live Demo](https://shavve.vercel.app/auth/signIn)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Future Tasks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Add user profile customization
+- Add dark mode
+- etc.
+
