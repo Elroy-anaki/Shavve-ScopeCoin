@@ -3,7 +3,7 @@ import { CryptosRealTimeTable } from "@/components/dashborad/crypto/CryptosRealT
 import Link from "next/link"
 import { trpcServerComp } from "@/server/trpcProvider"
 import { getServerSession } from "next-auth"
-import { authOptions} from "@/utils/auth/auth"
+import { authOptions} from "@/utils/auth/nextAuth"
 import { redirect } from "next/navigation"
 import { ConvertCryptoSection } from "@/components/dashborad/crypto/ConvertCryptoSection"
 
@@ -14,11 +14,13 @@ export default async function FavoritesPage() {
   if(!session) {
     redirect(`/auth/signIn`)
   }
+  // Get the favorites crypto here for SSR
   const favorites = session?.user?.id
     ? await trpcServerComp.cryptos.getFavoritesCryptos.query({ userId: Number(session.user.id) })
     : []
     
-  // List of all available cryptos for reference
+  // List of all available cryptos Just for the demo
+  // In real app, replace that with API call
   const allCryptos = ["BTC", "ETH", "SOL", "XRP", "LTC", "DOGE", "ADA", "BNB", "AVAX", "DOT"]
 
   return (
@@ -35,7 +37,6 @@ export default async function FavoritesPage() {
           </Link>
           <Link href="/crypto/allCryptos">
             <Button 
-              
              className="bg-gray-800 hover:bg-purple-700 text-white border border-purple-500/30 px-6 py-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20"
             >
               All Cryptos
@@ -67,7 +68,6 @@ export default async function FavoritesPage() {
           </div>
         </div>
       </div>
-      
       {/* Footer */}
       <div className="mt-12 py-6 border-t border-purple-900/50 bg-gray-900">
         <div className="container mx-auto px-4 text-center text-gray-400 text-sm">

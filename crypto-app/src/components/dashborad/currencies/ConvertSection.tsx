@@ -11,27 +11,39 @@ export interface IConvertionResult {
 }
 
 export function ConvertSection({ symbols }: any) {
+
+  // State need for this component
   const [amount, setAmount] = useState<number>(1);
   const [base, setBase] = useState<string>("");
   const [target, setTarget] = useState<string>("");
   const [convertionResult, setConvertionResult] = useState<IConvertionResult | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   
+  // tRPC request
   const convertReq = trpcClientComp.currencies.convertAmount.useMutation();
 
   const handleConvert = async () => {
+
     if (!target || !base) {
-      toast.error("Please select both currencies");
+      toast("Please select both currencies", {
+        style: {
+          backgroundColor: "#DC2626",
+          color: "#fff"
+        }
+      });
       return;
     }
-    
+
     if (amount <= 0) {
-      toast.error("Amount must be greater than 0");
+      toast("Amount must be greater than 0", {
+        style: {
+          backgroundColor: "#DC2626",
+          color: "#fff"
+        }
+      });
       return;
     }
-    
     setIsLoading(true);
-    
     try {
       const result = await convertReq.mutateAsync({ amount, base, target });
       setConvertionResult(result);
@@ -59,6 +71,8 @@ export function ConvertSection({ symbols }: any) {
           </label>
           <Input
             type="number"
+            min={1}
+            defaultValue={1}
             value={amount}
             onChange={(e) => {
               setAmount(Number(e.target.value));
@@ -122,18 +136,18 @@ export function ConvertSection({ symbols }: any) {
         {convertionResult !== null && (
           <div className="mt-8 p-6 bg-gray-700/70 rounded-xl border border-purple-500/20 animate-fadeIn transition-all">
             <div className="flex flex-col items-center">
-              <div className="text-center mb-4">
-                <p className="text-gray-300 text-sm">
+              <div className="text-center mb-4 flex justify-center items-center gap-2">
+                <p className="text-gray-300 text-lg font-bold">
                   {amount} {base} =
                 </p>
-                <h3 className="text-3xl font-bold text-white mt-1">
+                <h3 className="text-lg font-bold text-white ">
                   {convertionResult.conversion_result.toFixed(2)} <span className="text-purple-400">{target}</span>
                 </h3>
               </div>
               
               <div className="w-full h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent my-4"></div>
               
-              <p className="text-gray-400 text-sm mt-2 text-center">
+              <p className="text-purple-400 text-xl mt-2 text-center">
                 Exchange Rate: 1 {base} = {convertionResult.conversion_rate.toFixed(4)} {target}
               </p>
               

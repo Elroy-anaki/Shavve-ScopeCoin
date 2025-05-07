@@ -1,6 +1,8 @@
 import { createTransport, Transporter } from "nodemailer";
 import { envVars } from "../envVars/envVars.config";
 
+
+// Config nodemalier object 
 export const transporter: Transporter = createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -10,4 +12,3 @@ export const transporter: Transporter = createTransport({
       pass: String(envVars.EMAIL_SENDER_PASSWORD), 
     },
   });
-

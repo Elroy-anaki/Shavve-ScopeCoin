@@ -1,5 +1,6 @@
 import { User } from "@/config/db/schema"
 
+// Each function in this file return another template for sending it in email
 
 
 export const welcomeEmailTemplate = (userDetails: User): string => {

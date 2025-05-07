@@ -5,6 +5,7 @@ import { Providers } from "../providers/Providres";
 import { NavBar } from "@/components/ui/NavBar";
 
 import {AppToaster} from "@/providers/ToastProvider"
+import { Footer } from "@/components/ui/Fotter";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -41,6 +42,9 @@ export default function RootLayout({
             <AppToaster />
           </main>
         </Providers>
+        <div className="bg-gray-900">
+          <Footer />
+        </div>
       </body>
     </html>
   );

@@ -1,5 +1,7 @@
 import {create} from 'zustand';
 
+// This file contains the store of the cryptos
+
 type IcryptoState = {
   cryptoData: Object[] | null;
   setCryptoData: (data:Object[]) => void

@@ -3,6 +3,7 @@ import { transporter } from "@/config/emails/emailConfig";
 import { envVars } from "@/config/envVars/envVars.config";
 import { forgotPasswordEmailTemplate, verifyAccountEmailTemplate, welcomeEmailTemplate } from "@/templates/emailsTemplates";
 
+// Each function in this file sending another email to a user
 
 export const sendWelcomeEmail = async (user: User) => {
     try {

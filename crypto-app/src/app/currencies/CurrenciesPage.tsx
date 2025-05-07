@@ -12,6 +12,8 @@ interface ICurrenciesPageProps {
 }
 
 export const CurrenciesPage = ({ baseCurrency, allCurrenciesData }: ICurrenciesPageProps) => {
+  
+  // Get the name and symbols of currencies from the store (zustand)
   const currencies = currenciesStore((state) => state);
   
   return (

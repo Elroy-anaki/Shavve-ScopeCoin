@@ -1,6 +1,6 @@
 import { db } from "@/config/db";
 import { NewUserCurrency, UserCurrency, userCurrency } from "@/config/db/schema/userCurrency";
-import { authOptions } from "@/utils/auth/auth";
+import { authOptions } from "@/utils/auth/nextAuth";
 import { and, eq } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 
@@ -16,7 +16,6 @@ export const addCurrrencyForUser = async (currency: Omit<NewUserCurrency, "userI
 
 export const getCurrencySymbolsByUserId = async (userId: number): Promise<string[] | []> => {
     try {
-        
         const symbolsByUserId = await db
         .select({
             currencySymbol: userCurrency.currencySymbol

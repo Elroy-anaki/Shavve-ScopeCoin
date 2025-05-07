@@ -1,6 +1,6 @@
 import { db } from "@/config/db";
 import { userCrypto} from "@/config/db/schema/userCrypto"
-import { authOptions } from "@/utils/auth/auth";
+import { authOptions } from "@/utils/auth/nextAuth";
 import {  and, eq, inArray } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 
@@ -12,9 +12,7 @@ export const addCryptoForUser = async(crypto: string) => {
     } catch (error) {
         throw error
     }
-
 }
-
 export const getFavoritesCryptos = async(userId: number) => {
     try {
         const favoritesCryptos = await db.select({

@@ -1,5 +1,8 @@
+import deepFreeze from "deep-freeze";
 import { config } from "dotenv"
 
+// This file contains all env vars from the .env file 
+// For make sure nobody can modify this object I freezed it with deep-freeze library
 config();
 
 interface IEnvVars {
@@ -24,11 +27,13 @@ interface IEnvVars {
     EMAIL_SENDER: string,
     EMAIL_SENDER_PASSWORD: string,
     EMAIL_SECURE: boolean,
-    CLIENT_BASE_URL: string
+    CLIENT_BASE_URL: string,
+    CRYPTO_COMPARE_BASE_URL: string,
+    CRYPTO_COMPARE_APY_KEY: string
 
 }
 
-export const envVars: IEnvVars = {
+const  envvars: IEnvVars = {
     DB_HOST: process.env.DB_HOST || "",
     DB_PORT: Number(process.env.DB_PORT) || 5,
     DB_USER: process.env.DB_USER || "",
@@ -49,7 +54,10 @@ export const envVars: IEnvVars = {
     EMAIL_SENDER: process.env.EMAIL_SENDER || "",
     EMAIL_SENDER_PASSWORD: process.env.EMAIL_SENDER_PASSWORD || "",
     EMAIL_SECURE: Boolean(process.env.EMAIL_SECURE)|| true,
-    CLIENT_BASE_URL: process.env.CLIENT_BASE_URL || ""
+    CLIENT_BASE_URL: process.env.CLIENT_BASE_URL || "",
+    CRYPTO_COMPARE_BASE_URL: process.env.NEXT_PUBLIC_CRYPTO_COMPARE_BASE_URL || "",
+    CRYPTO_COMPARE_APY_KEY: process.env.NEXT_PUBLIC_CRYPTO_COMPARE_APY_KEY || ""
     
 }
+export const envVars = deepFreeze(envvars)
 

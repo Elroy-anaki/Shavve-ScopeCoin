@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { CryptosRealTimeTable } from "@/components/dashborad/crypto/CryptosRealTimeTable";
 import Link from "next/link"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/utils/auth/auth"
+import { authOptions } from "@/utils/auth/nextAuth"
 import { trpcServerComp } from "@/server/trpcProvider"
 import { redirect } from "next/navigation"
 import { ConvertCryptoSection } from "@/components/dashborad/crypto/ConvertCryptoSection"
@@ -14,11 +14,13 @@ export default async function AllCryptosPage() {
   if(!session) {
     redirect(`/auth/signIn`)
   }
+  // Get the favorites crypto here for SSR
   const favorites = session?.user?.id 
     ? await trpcServerComp.cryptos.getFavoritesCryptos.query({ userId: Number(session.user.id) })
     : []
     
-  // List of all available cryptos
+  // List of all available cryptos Just for the demo
+  // In real app, replace that with API call
   const allCryptos = ["BTC", "ETH", "SOL", "XRP", "LTC", "DOGE", "ADA", "BNB", "AVAX", "DOT"]
 
   return (
