@@ -22,6 +22,7 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { formatNumber, formatPercentChange, formatTimestamp, getPriceChangeStatus } from "@/utils/client/crypto/utils";
 import CryptoChart from "./CryptoChart";
+import { envVars } from "@/config/envVars/envVars.config";
 
 // Clean interface that matches WebSocket data structure
 interface Crypto {
@@ -48,14 +49,22 @@ export function CryptosRealTimeTable({
   userFavorites: string[];
   isFavorite: boolean
 }) {
-  // State management
+  // States
+  // The loop runs on an array that depend on this state
   const [cryptosArray, setCryptosArray] = useState<string[] | undefined>(isFavorite ? userFavorites : allCryptos)
+  // For the UI
   const [favorites, setFavorites] = useState<string[] | undefined>(userFavorites || []);
+  // For display the data from API (by socket)
   const [cryptos, setCryptos] = useState<Crypto[]>([]);
+  // For the UI
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  // For which currency get the data from tha API
   const [toCurrency, setToCurrency] = useState<string>("USD");
+  // For remove favorites operation
   const [cryptoToRemove, setCryptoToRemove] = useState<string[]>([])
+  // For spinner loading ( better user experience)
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  // For search feature
   const [searchTerm, setSearchTerm] = useState<string>("");
 
 
@@ -63,6 +72,7 @@ export function CryptosRealTimeTable({
   const session = useSession();
   const userId = Number(session.data?.user.id);
 
+  // Server API (tRPC)
   const { mutateAsync: addCrypto } = trpcClientComp.cryptos.addCryptoForUser.useMutation();
   const { mutateAsync: deleteCrypto } = trpcClientComp.cryptos.deleteFavoriteCrypto.useMutation();
   const { data: favoritesData, refetch } = trpcClientComp.cryptos.getFavoritesCryptos.useQuery(
@@ -88,10 +98,8 @@ export function CryptosRealTimeTable({
           style: {
             backgroundColor: "#16A34A", 
             color: "#fff"
-            
           }
         });
-        
       } else {
         await addCrypto({ crypto });
         // Immediately update local state for UI responsiveness
@@ -100,33 +108,28 @@ export function CryptosRealTimeTable({
           style: {
             backgroundColor: "#16A34A", 
             color: "#fff"
-            
           }
         });
-        
       }
       // Still refetch to ensure server and client are in sync
       refetch();
     } catch (error) {
       console.error(error);
-      
       toast("Operation failed", {
         style: {
           backgroundColor: "#DC2626", 
           color: "#fff"
-          
         }
       });
-      
     }
   };
 
   // Handler for bulk remove
   const handleBulkRemove = async () => {
     if (cryptoToRemove.length === 0) return;
-    
     try {
       await deleteCrypto({ crypto: cryptoToRemove, userId });
+      // Update all states Immediately
       setCryptosArray(prev => prev?.filter(item => !cryptoToRemove.includes(item)));
       setFavorites(prev => prev?.filter(item => !cryptoToRemove.includes(item)));
       setCryptoToRemove([]);
@@ -134,21 +137,17 @@ export function CryptosRealTimeTable({
         style: {
           backgroundColor: "#16A34A", 
           color: "#fff"
-          
         }
       });
-  
       refetch();
     } catch (error) {
       console.error(error);
       toast("Failed to remove selected cryptocurrencies", {
         style: {
           backgroundColor: "#DC2626", 
-          color: "#fff"
-          
+          color: "#fff" 
         }
       });
-      
     }
   };
 
@@ -160,9 +159,9 @@ export function CryptosRealTimeTable({
     setIsLoading(true);
     
     const socket = new WebSocket(
-      `wss://streamer.cryptocompare.com/v2?api_key=171fca74d34ef60117c3c5a3e1c4a79de1705327f3d5249cc0d77ba2c70bd181`
+      `${envVars.CRYPTO_COMPARE_BASE_URL}/v2?api_key=${envVars.CRYPTO_COMPARE_APY_KEY}`
     );
-
+    // Convert the list to API schema
     const subs = cryptosArray.map((sym) => `5~CCCAGG~${sym}~${toCurrency}`);
 
     socket.onopen = () => {

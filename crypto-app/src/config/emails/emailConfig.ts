@@ -10,4 +10,3 @@ export const transporter: Transporter = createTransport({
       pass: String(envVars.EMAIL_SENDER_PASSWORD), 
     },
   });
-
