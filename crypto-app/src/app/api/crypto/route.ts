@@ -4,13 +4,11 @@ import axios from 'axios';
 
 export async function GET() {
   try {
-    const url = `${envVars.COIN_MARKET_BASE_URL}/v1/cryptocurrency/map?limit=50`;
+    const url = `${envVars.COIN_MARKET_BASE_URL}/v1/cryptocurrency/map?limit=50&CMC_PRO_API_KEY=${envVars.COIN_MARKET_API_KEY}`;
     console.log("envVars.COIN_MARKET_API_KEY", envVars.COIN_MARKET_API_KEY)
-    const { data } = await axios.get(url, {
-      headers: {
-        'X-CMC_PRO_API_KEY': envVars.COIN_MARKET_API_KEY,
-      },
-    });
+    console.log(url)
+    const { data } = await axios.get(url)
+    console.log(data)
 
     return NextResponse.json(data.data);
   } catch (error: any) {
