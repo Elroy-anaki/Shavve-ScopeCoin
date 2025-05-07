@@ -19,40 +19,45 @@ export function ResetPasswordSection({resetPasswordId}: IResetPasswordSection){
 
     return (
         <>
-            <div className="text-center space-y-3">
-                <h2 className="text-2xl text-white ">You can reset your password here</h2>
-                <h3 className="text-lg text-white ">Enter your new password</h3>
-                <Input type="text" onChange={async (e) => setNewUserPassword(e.target.value)} className="text-sm sm:text-base p-2 sm:p-5 bg-white w-3/4 mx-auto"/>
-                {warning && <p className="text-sm text-red-500 text-left w-3/4 mx-auto">{warning}</p>}
-                <Button onClick={async () => {
-                    try {
-                        if(!newUserPassword) {
-                            setWarning("Enter your new password")
-                            return
+            <div className="text-center space-y-2 md:space-y-3">
+                <h2 className="text-xl md:text-2xl text-white">You can reset your password here</h2>
+                <h3 className="text-base md:text-lg text-white">Enter your new password</h3>
+                <Input 
+                    type="text" 
+                    onChange={async (e) => setNewUserPassword(e.target.value)} 
+                    className="text-sm sm:text-base p-2 sm:p-4 md:p-5 bg-white w-5/6 md:w-3/4 mx-auto"
+                />
+                {warning && <p className="text-xs sm:text-sm text-red-500 text-left w-5/6 md:w-3/4 mx-auto">{warning}</p>}
+                <Button 
+                    onClick={async () => {
+                        try {
+                            if(!newUserPassword) {
+                                setWarning("Enter your new password")
+                                return
+                            }
+                            await resetPasswordReq.mutateAsync({resetPasswordId, userPassword: newUserPassword})
+                            toast("Your new password changed", {
+                                style: {
+                                backgroundColor: "#16a34a",
+                                color: "#fff"
+                                }
+                            });
+                            router.replace(`/auth/signIn`)
+                        } catch (error) {
+                            console.error(error)
+                            toast("Changing password operation failed!", {
+                                style: {
+                                backgroundColor: "#DC2626",
+                                color: "#fff"
+                                }
+                            });
                         }
-                        await resetPasswordReq.mutateAsync({resetPasswordId, userPassword: newUserPassword})
-                        toast("Your new password changed", {
-                            style: {
-                              backgroundColor: "#16a34a",
-                              color: "#fff"
-                      
-                            }
-                          });
-                          router.replace(`/auth/signIn`)
-                    } catch (error) {
-                        console.error(error)
-                        toast("Changing password operation failed!", {
-                            style: {
-                              backgroundColor: "#DC2626",
-                              color: "#fff"
-                    
-                            }
-                          });
-
-                    }
-                }} className="w-3/4 mx-auto bg-purple-600 hover:bg-purple-500">Reset</Button>
+                    }} 
+                    className="w-5/6 md:w-3/4 mx-auto bg-purple-600 hover:bg-purple-500"
+                >
+                    Reset
+                </Button>
             </div>
         </>
-
     )
 }

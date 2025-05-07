@@ -4,13 +4,46 @@ import Link from "next/link"
 import { Button } from "./button"
 import LogoutButton from "../auth/LogoutButton"
 import { useSession } from "next-auth/react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 
 export const NavBar = () => {
     const session = useSession();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Close menu when clicking outside or pressing escape
+    useEffect(() => {
+        const handleEscKey = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') {
+                setIsMenuOpen(false);
+            }
+        };
+
+        const handleClickOutside = (event: MouseEvent) => {
+            // Check if clicked outside the menu
+            const drawer = document.getElementById('mobile-drawer');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (isMenuOpen && drawer && !drawer.contains(event.target as Node) && 
+                menuButton && !menuButton.contains(event.target as Node)) {
+                setIsMenuOpen(false);
+            }
+        };
+
+        if (isMenuOpen) {
+            document.addEventListener('keydown', handleEscKey);
+            document.addEventListener('mousedown', handleClickOutside);
+            // Prevent scrolling when drawer is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleEscKey);
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.body.style.overflow = 'auto';
+        };
+    }, [isMenuOpen]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -22,17 +55,6 @@ export const NavBar = () => {
             <div className="hidden md:flex w-11/12 mx-auto justify-between items-center py-2">
                 {/* Logo/Username section (left) */}
                 <div className="flex items-center gap-2">
-                    <Link href={`/`}>
-                        <Button className="rounded-lg bg-transparent p-0 hover:bg-transparent">
-                            <Image
-                                src="/logo.jpg"
-                                alt="Logo"
-                                width={70}
-                                height={50}
-                                className="rounded-xl bg-transparent"
-                            />                           
-                        </Button>
-                    </Link>
                     <Link href={`/auth/signUp`}>
                         <Button className="rounded-lg bg-transparent py-4 text-xl hover:bg-purple-700">
                             {session.status === "authenticated" ? session.data.user?.name : `Hi, guest!`}
@@ -84,17 +106,6 @@ export const NavBar = () => {
                     
                     {/* Logo/Username centered */}
                     <div className="flex items-center gap-2 justify-center">
-                        <Link href={`/`}>
-                            <Button className="rounded-lg bg-transparent p-0 hover:bg-transparent">
-                                <Image
-                                    src="/logo.jpg"
-                                    alt="Logo"
-                                    width={70}
-                                    height={50}
-                                    className="rounded-xl bg-transparent"
-                                />                           
-                            </Button>
-                        </Link>
                         <Link href={`/auth/signUp`}>
                             <Button className="rounded-lg bg-transparent py-2 text-lg hover:bg-purple-700">
                                 {session.status === "authenticated" ? session.data.user?.name : `Hi, guest!`}
@@ -104,28 +115,47 @@ export const NavBar = () => {
                     
                     {/* Mobile menu button */}
                     <button
+                        id="menu-button"
                         onClick={toggleMenu}
-                        className="text-white p-2"
+                        className="text-white p-2 z-50"
                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     >
                         {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
 
-                {/* Mobile collapsible menu */}
-                {isMenuOpen && (
-                    <div className="w-full mt-2 pb-4 border-t border-gray-700">
-                        <ul className="flex flex-col gap-3 pt-3">
+                {/* Mobile side drawer menu */}
+                <div 
+                    className={`fixed top-0 right-0 h-full bg-purple-900 shadow-lg z-40 w-64 transform transition-transform duration-300 ease-in-out ${
+                        isMenuOpen ? "translate-x-0" : "translate-x-full"
+                    }`}
+                    id="mobile-drawer"
+                >
+                    {/* Drawer content */}
+                    <div className="p-5 h-full flex flex-col">
+                        {/* Close button at top right */}
+                        <div className="flex justify-end mb-6">
+                            <button 
+                                onClick={() => setIsMenuOpen(false)}
+                                className="text-white"
+                                aria-label="Close menu"
+                            >
+                                <X size={24} />
+                            </button>
+                        </div>
+                        
+                        {/* Menu items */}
+                        <ul className="flex flex-col gap-4">
                             <li>
-                                <Link href={`crypto/allCryptos`}>
-                                    <Button className="rounded-lg bg-transparent px-5 py-3 font-semibold text-lg hover:bg-purple-700 w-full text-left">
+                                <Link href={`crypto/allCryptos`} onClick={() => setIsMenuOpen(false)}>
+                                    <Button className="rounded-lg bg-transparent px-4 py-3 font-semibold text-lg hover:bg-purple-700 w-full text-left">
                                         Crypto
                                     </Button>
                                 </Link>
                             </li>
                             <li>
-                                <Link href={`/currencies`}>
-                                    <Button className="rounded-lg bg-transparent px-5 py-3 font-semibold text-lg hover:bg-purple-700 w-full text-left">
+                                <Link href={`/currencies`} onClick={() => setIsMenuOpen(false)}>
+                                    <Button className="rounded-lg bg-transparent px-4 py-3 font-semibold text-lg hover:bg-purple-700 w-full text-left">
                                         Currencies
                                     </Button>
                                 </Link>
@@ -133,17 +163,17 @@ export const NavBar = () => {
                             
                             {/* Auth buttons in mobile menu */}
                             {session.status === "authenticated" ? (
-                                <li className="mt-3">
+                                <li className="mt-4">
                                     <LogoutButton />
                                 </li>
                             ) : (
-                                <li className="flex flex-col gap-2 mt-3">
-                                    <Link href={`/auth/signIn`} className="w-full">
+                                <li className="flex flex-col gap-3 mt-4">
+                                    <Link href={`/auth/signIn`} className="w-full" onClick={() => setIsMenuOpen(false)}>
                                         <Button className="rounded-lg bg-transparent hover:bg-purple-700 w-full">
                                             Sign In
                                         </Button>
                                     </Link>
-                                    <Link href={`/auth/signUp`} className="w-full">
+                                    <Link href={`/auth/signUp`} className="w-full" onClick={() => setIsMenuOpen(false)}>
                                         <Button className="rounded-lg bg-transparent hover:bg-purple-700 w-full">
                                             Sign Up
                                         </Button>
@@ -152,6 +182,14 @@ export const NavBar = () => {
                             )}
                         </ul>
                     </div>
+                </div>
+                
+                {/* Semi-transparent overlay to darken the rest of the screen */}
+                {isMenuOpen && (
+                    <div 
+                        className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-30"
+                        onClick={() => setIsMenuOpen(false)}
+                    />
                 )}
             </div>
         </div>
