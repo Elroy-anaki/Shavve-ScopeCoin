@@ -6,7 +6,6 @@ import LogoutButton from "../auth/LogoutButton"
 import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
-import Image from "next/image"
 
 export const NavBar = () => {
     const session = useSession();
