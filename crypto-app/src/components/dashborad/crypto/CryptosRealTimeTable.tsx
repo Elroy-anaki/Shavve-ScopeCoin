@@ -157,7 +157,8 @@ export function CryptosRealTimeTable({
     if (!cryptosArray || cryptosArray.length === 0) return;
 
     setIsLoading(true);
-    
+    console.log(envVars.CRYPTO_COMPARE_BASE_URL)
+    console.log(envVars.CRYPTO_COMPARE_APY_KEY)
     const socket = new WebSocket(
       `${envVars.CRYPTO_COMPARE_BASE_URL}/v2?api_key=${envVars.CRYPTO_COMPARE_APY_KEY}`
     );
