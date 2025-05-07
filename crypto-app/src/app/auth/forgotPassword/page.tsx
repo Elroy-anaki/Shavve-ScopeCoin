@@ -1,5 +1,5 @@
 import { ForgotPasswordSection } from "@/components/auth/ForgotPasswordSection";
-import { authOptions, isSession } from "@/utils/auth/auth";
+import { authOptions, isSession } from "@/utils/auth/nextAuth";
 import { redirect } from "next/navigation";
 
 

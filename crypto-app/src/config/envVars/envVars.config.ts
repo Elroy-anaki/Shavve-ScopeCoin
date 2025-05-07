@@ -1,6 +1,8 @@
 import deepFreeze from "deep-freeze";
 import { config } from "dotenv"
 
+// This file contains all env vars from the .env file 
+// For make sure nobody can modify this object I freezed it with deep-freeze library
 config();
 
 interface IEnvVars {

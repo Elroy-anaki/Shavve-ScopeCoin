@@ -1,14 +1,17 @@
 
 # ScopeCoin
 
+## Live
+
+The application is deployed on Vercel. You can access it here: [Live Demo](https://shavve.vercel.app/auth/signIn)
+
 ## Table of Contents
 1. [Project Description](#project-description)
 2. [Tech Stack](#tech-stack)
 3. [Features](#features)
 4. [Installation](#installation)
 5. [API + Libraries](#api--libraries)
-6. [Live](#live)
-7. [Future Tasks](#future-tasks)
+6. [Future Tasks](#future-tasks)
 
 ---
 
@@ -24,14 +27,14 @@ A mini application designed to allow users to:
 
 ## Tech Stack
 
-> _Fill this section with your selected technologies_
+
 
 Example:
 
 - **Frontend:** Next.js, TailwindCSS, Shadcn
-- **Backend:** Next.js API Routes, NextAuth.js
-- **Database:** PostgreSQL (Neon)
-- **APIs:** CoinMarketCap, Alpha Vantage, Open Exchange Rates
+- **Backend:** Next.js API Routes, NextAuth.js, tRPC
+- **Database:** PostgreSQL (Neon) with drizzle ORM
+- **APIs:** CoinMarketCap, Alpha Vantage, Open Exchange Rates, cryproCompare
 - **Email:** Nodemailer 
 
 ---
@@ -55,12 +58,13 @@ The dashboard provides a personalized experience:
 - **Favorites** – Save preferred cryptocurrencies for quick access.
 - **Currency Conversion** – Convert between crypto and fiat instantly.
 - **Real-Time Data -> (Web Socket)** – Always up-to-date via API integrations.
+- **Quick access** – Client side searching
 
 ---
 
 ## Environment Variables
 
-Create a `.env.local` file in the root directory with the following variables:
+Create a `.env` file in the root directory with the following variables:
 
 ```env
 # Database Configuration
@@ -90,6 +94,9 @@ EXCHANGE_RATE_API_KEY=your-exchange-rate-api-key
 NEXT_PUBLIC_COIN_MARKET_BASE_URL=https://pro-api.coinmarketcap.com
 NEXT_PUBLIC_COIN_MARKET_API_KEY=your-coinmarketcap-api-key
 
+NEXT_PUBLIC_CRYPTO_COMPARE_BASE_URL=wss://streamer.cryptocompare.com
+NEXT_PUBLIC_CRYPTO_COMPARE_APY_KEY=your-cryptocompare-api-key
+
 # Email Configuration
 EMAIL_SENDER=your-email@example.com
 EMAIL_SENDER_PASSWORD=your-email-password
@@ -103,9 +110,9 @@ CLIENT_BASE_URL=http://localhost:3000
 ```
 git clone https://github.com/Elroy-anaki/Shavve.git
 ```
-### Navigate to your folder 
+### Navigate to crypto-app
 ```
-cd your folder
+cd crypto-app
 ```
 ### Install dependencies
 ```
@@ -130,12 +137,9 @@ npm run dev
 
 - **Nodemailer** – A module for Node.js to send emails. It supports various transport methods including SMTP, and is often used for sending confirmation emails, password resets, and notifications.
 
+- **Drizzle** – A lightweight TypeScript ORM for SQL databases. It offers type-safe queries and simple schema management with minimal setup.
+
 - **etc.**
-
-## Live
-
-The application is deployed on Vercel. You can access it here: [Live Demo](https://shavve.vercel.app/auth/signIn)
-
 
 
 ## Future Tasks

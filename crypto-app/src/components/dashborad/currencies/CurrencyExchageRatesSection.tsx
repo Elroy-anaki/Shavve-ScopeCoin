@@ -14,6 +14,7 @@ export function CurrencyExchageRatesSection({
   symbols: any;
   allCurrenciesData: any;
 }) {
+
   // Utils hooks
   const session = useSession();
 
@@ -48,21 +49,18 @@ export function CurrencyExchageRatesSection({
         style: {
           backgroundColor: "#F59E0B", 
           color: "#fff"
-          
         }
       });
       return;
     }
-    
     try {
       await addCurrencyForUser.mutateAsync({ currencySymbol: currencyToAdd });
+      // update the UI -> refetch the API call
       refetch();
-      
       toast(`${currencyToAdd} added successfully`, {
         style: {
           backgroundColor: "#16A34A", 
           color: "#fff"
-          
         }
       });
       setAddCurrenyOpen(false);
@@ -73,7 +71,6 @@ export function CurrencyExchageRatesSection({
         style: {
           backgroundColor: "#DC2626", 
           color: "#fff"
-          
         }
       });
     }
@@ -89,7 +86,6 @@ export function CurrencyExchageRatesSection({
         style: {
           backgroundColor: "#16A34A", 
           color: "#fff"
-          
         }
       });
       refetch();

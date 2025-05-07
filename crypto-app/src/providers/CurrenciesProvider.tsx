@@ -1,5 +1,8 @@
 'use client';
 
+// This component runs in the start of the app
+// We import the currencies one time and we can access them in the app
+
 import { useEffect } from 'react';
 import currenciesStore from '@/stores/currenciesStore';
 import axios from 'axios';

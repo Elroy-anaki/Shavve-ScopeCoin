@@ -1,3 +1,5 @@
+// This file contanis utils for display values pretty in the CryptoRealTimePrices
+
 export const formatTimestamp = (timestamp: number): string => {
     const date = new Date(timestamp * 1000);
     return date.toLocaleTimeString('en-US');

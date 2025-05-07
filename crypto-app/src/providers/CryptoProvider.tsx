@@ -1,5 +1,8 @@
 'use client';
 
+// This component runs in the start of the app
+// We import the cryptos one time and we can access them in the app
+
 import { useEffect } from 'react';
 import cryptoStore from '@/stores/cryptoStore';
 import axios from 'axios';

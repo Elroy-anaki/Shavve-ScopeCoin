@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/auth/auth";
+import { authOptions } from "@/utils/auth/nextAuth";
 import { initTRPC, TRPCError } from "@trpc/server";
 
 

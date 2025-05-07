@@ -1,4 +1,4 @@
-import { authOptions, isSession } from "@/utils/auth/auth"
+import { authOptions, isSession } from "@/utils/auth/nextAuth"
 import { redirect } from "next/navigation"
 import {SignUpPage} from "./SignUpPage"
 
